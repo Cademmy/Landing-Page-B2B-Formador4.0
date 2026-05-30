@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  
+  --color-brand-vino: #935144;
+  --color-brand-red: #F22E2E;
+  --color-brand-orange: #F2561D;
+  --color-brand-magenta: #F22248;
+  --color-brand-bright-orange: #FF8C00;
+  --color-brand-yellow: #FFBA00;
+}
+
+@layer base {
+  body {
+    font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  }
+  
+  section {
+    scroll-margin-top: 5rem;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #F2561D;
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #935144;
+}

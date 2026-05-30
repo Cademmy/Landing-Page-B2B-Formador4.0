@@ -1,0 +1,7 @@
+{
+  "name": "Instructor 4.0 - Cademmy (B2B)",
+  "description": "Landing page de alta conversión para el curso Instructor 4.0: IA y Certificación CONOCER. Incluye microcursos modulares, integración con Stripe, Microsoft Bookings y soporte con IA.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
