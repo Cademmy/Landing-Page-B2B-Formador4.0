@@ -35,7 +35,7 @@ const App: React.FC = () => {
     if (id === 'plan-iniciador') {
       return {
         requirement: 'Plan Iniciador B2B - Proyecto Piloto',
-        price: '$1,990 MXN / hora de taller'
+        price: '$7,990 MXN + IVA / instructor · 34 horas de curso'
       };
     }
     if (id === 'plan-equipos') {
@@ -101,9 +101,9 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen relative">
+    <div className="min-h-screen relative cademmy-page-bg">
       {/* Navbar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-xl border-b border-gray-100 h-20 flex items-center">
+      <nav className="fixed top-0 left-0 right-0 z-50 h-20 flex items-center">
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div 
             className="flex items-center gap-2 cursor-pointer" 
@@ -115,20 +115,20 @@ const App: React.FC = () => {
             <img src="/isologotipo vertical.jpeg" alt="CADEMMY" className="h-16 w-auto" referrerPolicy="no-referrer" />
           </div>
           
-          <div className="hidden md:flex items-center gap-8">
-            <button onClick={() => navigateTo('modules')} className="text-sm font-bold text-gray-500 hover:text-brand-orange transition">RUTA MODULAR</button>
-            <button onClick={() => navigateTo('benefits')} className="text-sm font-bold text-gray-500 hover:text-brand-orange transition">BENEFICIOS</button>
-            <button onClick={() => navigateTo('faq')} className="text-sm font-bold text-gray-500 hover:text-brand-orange transition">PREGUNTAS FRECUENTES</button>
-            <button onClick={() => navigateTo('contact')} className="text-sm font-bold text-gray-500 hover:text-brand-orange transition">CONTACTO</button>
+          <div className="hidden md:flex items-center gap-2 glass-panel rounded-full px-3 py-2">
+            <button onClick={() => navigateTo('modules')} className="px-4 py-2 rounded-full text-[13px] font-bold text-brand-slate hover:text-brand-ink hover:bg-white/70 transition">RUTA MODULAR</button>
+            <button onClick={() => navigateTo('benefits')} className="px-4 py-2 rounded-full text-[13px] font-bold text-brand-slate hover:text-brand-ink hover:bg-white/70 transition">BENEFICIOS</button>
+            <button onClick={() => navigateTo('faq')} className="px-4 py-2 rounded-full text-[13px] font-bold text-brand-slate hover:text-brand-ink hover:bg-white/70 transition">PREGUNTAS FRECUENTES</button>
+            <button onClick={() => navigateTo('contact')} className="px-4 py-2 rounded-full text-[13px] font-bold text-brand-slate hover:text-brand-ink hover:bg-white/70 transition">CONTACTO</button>
             <button 
               onClick={handleBooking}
-              className="px-6 py-2.5 bg-brand-orange text-white rounded-xl text-sm font-bold hover:bg-brand-red transition shadow-md shadow-brand-orange/20"
+              className="px-5 py-2.5 cademmy-primary rounded-full text-[13px] font-bold transition"
             >
               AGENDAR CITA
             </button>
           </div>
 
-          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden text-gray-900 p-2">
+          <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden text-brand-ink p-2 glass-panel rounded-full">
             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               {isMenuOpen ? <line x1="18" y1="6" x2="6" y2="18" /> : <><line x1="3" y1="12" x2="21" y2="12" /><line x1="3" y1="6" x2="21" y2="6" /><line x1="3" y1="18" x2="21" y2="18" /></>}
             </svg>
@@ -138,21 +138,21 @@ const App: React.FC = () => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-white pt-24 animate-in slide-in-from-top duration-300 md:hidden">
+        <div className="fixed inset-0 z-50 bg-brand-soft pt-24 animate-in slide-in-from-top duration-300 md:hidden">
           <div className="flex flex-col items-center gap-8 p-10">
-            <button onClick={() => navigateTo('modules')} className="text-2xl font-bold text-gray-900">RUTA MODULAR</button>
-            <button onClick={() => navigateTo('benefits')} className="text-2xl font-bold text-gray-900">BENEFICIOS</button>
-            <button onClick={() => navigateTo('faq')} className="text-2xl font-bold text-gray-900">PREGUNTAS FRECUENTES</button>
-            <button onClick={() => navigateTo('contact')} className="text-2xl font-bold text-gray-900">CONTACTO</button>
+            <button onClick={() => navigateTo('modules')} className="text-2xl font-bold text-brand-ink">RUTA MODULAR</button>
+            <button onClick={() => navigateTo('benefits')} className="text-2xl font-bold text-brand-ink">BENEFICIOS</button>
+            <button onClick={() => navigateTo('faq')} className="text-2xl font-bold text-brand-ink">PREGUNTAS FRECUENTES</button>
+            <button onClick={() => navigateTo('contact')} className="text-2xl font-bold text-brand-ink">CONTACTO</button>
             <button 
               onClick={handleBooking}
-              className="w-full py-5 bg-brand-orange text-white rounded-2xl font-bold text-xl"
+              className="w-full py-5 cademmy-primary rounded-2xl font-bold text-xl"
             >
               AGENDAR CITA
             </button>
             <button 
               onClick={handleBooking}
-              className="w-full py-5 border-2 border-gray-200 text-gray-600 rounded-2xl font-bold text-xl"
+              className="w-full py-5 glass-panel text-brand-slate rounded-2xl font-bold text-xl"
             >
               AGENDAR ASESORÍA
             </button>
@@ -179,35 +179,35 @@ const App: React.FC = () => {
       </main>
 
       {/* Footer */}
-      <footer className="bg-white py-20 border-t border-gray-100">
+      <footer className="bg-white/70 backdrop-blur-xl py-20 border-t border-white/70">
         <div className="container mx-auto px-6 text-center md:text-left">
           <div className="grid md:grid-cols-4 gap-12 mb-16">
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center gap-2 mb-6 justify-center md:justify-start">
                 <img src="/isologotipo vertical.jpeg" alt="CADEMMY LEARNING" className="h-14 w-auto" referrerPolicy="no-referrer" />
               </div>
-              <p className="text-gray-500 max-w-sm mx-auto md:mx-0 mb-6 leading-relaxed font-medium">
+              <p className="text-brand-muted max-w-sm mx-auto md:mx-0 mb-6 leading-relaxed font-medium">
                 Potenciamos tu perfil profesional con tecnología de vanguardia y certificaciones oficiales CONOCER.
               </p>
             </div>
             
             <div>
-              <h4 className="font-bold text-gray-900 mb-6 uppercase tracking-widest text-xs">Contacto Rápido</h4>
-              <ul className="space-y-4 text-sm text-gray-500 font-bold">
+              <h4 className="font-bold text-brand-ink mb-6 uppercase tracking-widest text-xs">Contacto Rápido</h4>
+              <ul className="space-y-4 text-sm text-brand-muted font-bold">
                 <li>+52 55 5293 9203</li>
                 <li>contacto@cademmy.com</li>
               </ul>
             </div>
             
             <div>
-              <h4 className="font-bold text-gray-900 mb-6 uppercase tracking-widest text-xs">Información Legal</h4>
-              <ul className="space-y-2 text-sm text-gray-500">
+              <h4 className="font-bold text-brand-ink mb-6 uppercase tracking-widest text-xs">Información Legal</h4>
+              <ul className="space-y-2 text-sm text-brand-muted">
                 <li><button onClick={() => setShowLegal(true)} className="hover:text-brand-orange transition font-bold">Aviso de Privacidad</button></li>
                 <li><button onClick={() => setShowLegal(true)} className="hover:text-brand-orange transition font-bold">Términos de Servicio</button></li>
               </ul>
             </div>
           </div>
-          <div className="pt-8 border-t border-gray-100 text-center text-[10px] text-gray-400 font-bold uppercase tracking-[0.3em]">
+          <div className="pt-8 border-t border-brand-muted-bg text-center text-[10px] text-brand-muted font-bold uppercase tracking-[0.3em]">
             <p>© 2026 CADEMMY LEARNING SAS. TODOS LOS DERECHOS RESERVADOS.</p>
           </div>
         </div>
@@ -216,7 +216,7 @@ const App: React.FC = () => {
       {/* Enrollment Modal (HubSpot Form) */}
       {showStripeSimulation.show && (
         <div className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-white rounded-[2rem] w-full max-w-xl max-h-[90vh] flex flex-col shadow-2xl animate-in zoom-in duration-300 relative overflow-hidden">
+          <div className="glass-card rounded-[2rem] w-full max-w-xl max-h-[90vh] flex flex-col shadow-2xl animate-in zoom-in duration-300 relative overflow-hidden">
              
              {/* Dynamic Selection Header */}
              <div className="px-6 py-5 bg-slate-50 border-b border-gray-100 flex items-center justify-between shrink-0">

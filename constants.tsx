@@ -106,7 +106,7 @@ export const MODULES: Module[] = [
     id: "m1-planeacion",
     title: "Módulo 2: Planeación Didáctica con IA (SMART-Bloom)",
     description: "Diseño instruccional para el puesto. Formula objetivos técnicos mediante neuroeducación y cartas descriptivas validadas por IA.",
-    fullDescription: "Paso uno para asegurar el ROI: el planeamiento estructurado de un curso. Diseña el eje rector de la capacitación corporativa formulando objetivos claros y medibles en tres dominios clave. Optimiza las cartas descriptivas del negocio integrando IA para acortar tiempos de diseño y blindar las auditorías.",
+    fullDescription: "Paso uno para mejorar la trazabilidad del ROI: el planeamiento estructurado de un curso. Diseña el eje rector de la capacitación corporativa formulando objetivos claros y medibles en tres dominios clave. Optimiza las cartas descriptivas del negocio integrando IA para acortar tiempos de diseño y fortalecer la documentación ante revisiones internas.",
     objective: "El participante diseñará y formulará objetivos de aprendizaje efectivos y alineados a competencias bajo metodologías SMART y la Taxonomía de Bloom, utilizando Inteligencia Artificial para el desarrollo ágil de cartas descriptivas que impacten directamente en la mejora del desempeño laboral.",
     particularObjectives: [
       "[Cognitivo] Aplicar SMART y la Taxonomía de Bloom en la formulación técnica de objetivos de capacitación empresarial.",
@@ -115,7 +115,7 @@ export const MODULES: Module[] = [
     ],
     expectedResults: [
       "Diferencia con exactitud los niveles y dominios taxonómicos aplicables a cada rol productivo.",
-      "Enuncia objetivos de aprendizaje técnicamente blindados que faciliten su medición analítica.",
+      "Enuncia objetivos de aprendizaje técnicamente estructurados que faciliten su medición analítica.",
       "Reduce el tiempo invertido en estructurar planeaciones didácticas de semanas a solo horas usando asistentes de IA gobernados por rúbricas."
     ],
     subtopics: [
@@ -148,7 +148,7 @@ export const MODULES: Module[] = [
     benefits: [
       "Planificación ágil y de alto impacto",
       "Uso proactivo y controlado de IA",
-      "Estructuras blindadas ante auditorías"
+      "Estructuras documentadas para auditorías"
     ],
     skills: ["Diseño Instruccional", "Metodología SMART", "Neuroeducación", "Gobernanza de IA"]
   },
@@ -363,7 +363,7 @@ export const MODULES: Module[] = [
     id: "m2-evaluacion",
     title: "Módulo 5: Evaluación del Aprendizaje con IA",
     description: "Crea rúbricas de desempeño, guías de observación y listas de cotejo para productos del puesto validadas por IA en segundos.",
-    fullDescription: "Punto ciego de la capacitación interna: la medición real de la efectividad. Domina la formulación de instrumentos diagnósticos, de producto y conductuales que garantizan que el personal no solo asista, sino que demuestre que sabe ejecutar. Aprende a aplicar analítica de datos e IA para automatizar exámenes individuales y presentar reportes del ROI a Dirección.",
+    fullDescription: "Punto ciego de la capacitación interna: la medición real de la efectividad. Domina la formulación de instrumentos diagnósticos, de producto y conductuales para que el personal no solo asista, sino que demuestre lo que sabe ejecutar. Aprende a aplicar analítica de datos e IA para automatizar exámenes individuales y presentar reportes más claros a Dirección.",
     objective: "El participante diseña e implementa estrategias integrales de evaluación del aprendizaje utilizando herramientas de IA, con la finalidad de medir con exactitud el progreso de las competencias laborales de los colaboradores y optimizar la retroalimentación organizacional.",
     particularObjectives: [
       "[Cognitivo] Estrechar las diferencias técnicas entre evaluación diagnóstica, formativa y sumativa.",
@@ -472,7 +472,7 @@ export const MODULES: Module[] = [
       "[Afectivo] Adoptar el rigor y consistencia documental de la capacitación como un activo estratégico de la Dirección de Recursos Humanos."
     ],
     expectedResults: [
-      "Identifica el 100% de las variables obligatorias de producto, desempeño y conocimiento exigidas por el estándar nacional.",
+      "Identifica las variables obligatorias de producto, desempeño y conocimiento exigidas por el estándar nacional.",
       "Diseña materiales didácticos estandarizados y carpetas de evidencia técnicamente sólidas.",
       "Utiliza plantillas lógicas e IA automatizada para catalogar, almacenar y etiquetar portafolios digitales en segundos."
     ],
@@ -554,9 +554,9 @@ export const MODULES: Module[] = [
   {
     id: "m3-simulaciones",
     title: "Módulo 7: Simulaciones y Retroalimentación con IA",
-    description: "Evaluación definitiva de facilitadores con observadores expertos y asistentes virtuales inteligentes. Mitiga nervios y garantiza la competencia a la primera.",
+    description: "Práctica final de facilitadores con observadores expertos y asistentes virtuales inteligentes. Reduce fricción, fortalece el desempeño y prepara mejor al participante para una evaluación formal.",
     fullDescription: "La maestría proviene puramente de la práctica evaluada metodológicamente. En este microcurso integrador final, tus facilitadores asumen la conducción presencial u online de un curso frente a un panel calificado. Es una simulación al amparo de observadores seniors y un motor de IA que califica lenguaje andragógico, control de tiempos y ritmo expositivo.",
-    objective: "El participante emplea simulaciones operativas y retroalimentación interactiva auxiliada por Inteligencia Artificial, con la finalidad de perfeccionar el desempeño instruccional real y garantizar dictámenes aprobatorios de competencia laboral.",
+    objective: "El participante emplea simulaciones operativas y retroalimentación interactiva auxiliada por Inteligencia Artificial, con la finalidad de perfeccionar el desempeño instruccional real y fortalecer su preparación ante dictámenes de competencia laboral.",
     particularObjectives: [
       "[Psicomotor] Conducir una sesión formativa simulada con todos los controles normativos establecidos por el CONOCER.",
       "[Cognitivo] Diagnosticar debilidades y aciertos en el dominio del escenario (tiempo, dinámicas de grupo, retroalimentación).",

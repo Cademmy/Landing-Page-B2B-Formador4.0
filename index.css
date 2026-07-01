@@ -1,24 +1,107 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Montserrat", ui-sans-serif, system-ui, sans-serif;
   
+  --color-brand-ink: #22222E;
+  --color-brand-slate: #54546E;
+  --color-brand-muted: #6B6B88;
+  --color-brand-soft: #F7F7FB;
+  --color-brand-muted-bg: #EEEEF5;
+  --color-brand-learning: #1A6FE8;
+  --color-brand-certification: #1FAD62;
+  --color-brand-consulting: #E87220;
   --color-brand-vino: #935144;
-  --color-brand-red: #F22E2E;
-  --color-brand-orange: #F2561D;
-  --color-brand-magenta: #F22248;
-  --color-brand-bright-orange: #FF8C00;
-  --color-brand-yellow: #FFBA00;
+  --color-brand-red: #EF4D2D;
+  --color-brand-orange: #F5821F;
+  --color-brand-magenta: #C81848;
+  --color-brand-bright-orange: #F5821F;
+  --color-brand-yellow: #F9C418;
 }
 
 @layer base {
+  html {
+    background: #F7F7FB;
+  }
+
   body {
+    font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+    color: #22222E;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(26, 111, 232, 0.16), transparent 28rem),
+      radial-gradient(circle at 88% 12%, rgba(245, 130, 31, 0.14), transparent 24rem),
+      radial-gradient(circle at 48% 88%, rgba(31, 173, 98, 0.1), transparent 24rem),
+      linear-gradient(180deg, #F7F7FB 0%, #FFFFFF 42%, #F7F7FB 100%);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
     font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+    color: #22222E;
+    letter-spacing: -0.03em;
   }
   
   section {
     scroll-margin-top: 5rem;
+  }
+}
+
+@layer components {
+  .cademmy-page-bg {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .cademmy-page-bg::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(84, 84, 110, 0.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(84, 84, 110, 0.045) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0.72), transparent 72%);
+  }
+
+  .glass-panel {
+    background: linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.52));
+    border: 1px solid rgba(255,255,255,0.86);
+    box-shadow:
+      0 1px 0 rgba(0,0,0,0.05),
+      0 4px 4px rgba(0,0,0,0.05),
+      0 10px 10px rgba(0,0,0,0.1);
+    backdrop-filter: blur(20px);
+  }
+
+  .glass-card {
+    background: rgba(255,255,255,0.72);
+    border: 1px solid rgba(255,255,255,0.82);
+    box-shadow: 0 18px 45px rgba(34, 34, 46, 0.08);
+    backdrop-filter: blur(18px);
+  }
+
+  .cademmy-chip {
+    background: linear-gradient(180deg, rgba(255,255,255,0.78), rgba(255,255,255,0.48));
+    border: 1px solid rgba(255,255,255,0.88);
+    box-shadow: 0 10px 18px rgba(34, 34, 46, 0.08);
+    backdrop-filter: blur(16px);
+  }
+
+  .cademmy-primary {
+    background: linear-gradient(135deg, #F5821F 0%, #EF4D2D 100%);
+    color: white;
+    box-shadow: 0 12px 24px rgba(239, 77, 45, 0.24);
+  }
+
+  .cademmy-primary:hover {
+    filter: saturate(1.08) brightness(0.98);
+    box-shadow: 0 16px 30px rgba(239, 77, 45, 0.28);
   }
 }
 
@@ -31,7 +114,7 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #F2561D;
+  background: #F5821F;
   border-radius: 10px;
 }
 

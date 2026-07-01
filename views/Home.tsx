@@ -36,7 +36,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "¿Qué resultados puedo esperar como líder de Recursos Humanos?",
-    answer: "• Menos variabilidad metodológica en la impartición de tus instructores de planta.\n• Expedientes de evidencia 100% auditables (instrumentos + portafolio completo por participante).\n• Trazabilidad total de la asimilación del aprendizaje.\n• Una sólida base de reportabilidad para tus juntas de comité o auditorías regulatorias."
+    answer: "• Menos variabilidad metodológica en la impartición de tus instructores de planta.\n• Expedientes de evidencia defendibles (instrumentos + portafolio por participante).\n• Mayor trazabilidad sobre la asimilación del aprendizaje.\n• Una base más clara de reportabilidad para tus juntas de comité o auditorías regulatorias."
   },
   {
     question: "¿Qué entregables físicos/digitales recibe la organización?",
@@ -48,7 +48,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "¿Este entrenamiento interrumpe la operación diaria de nuestra planta?",
-    answer: "En absoluto. Entendemos perfectamente el costo operativo de frenar líneas de producción o retirar ingenieros clave. Por ello, Instructor 4.0 opera bajo microcursos sumamente ágiles que se agendan in-company en horarios flexibles (presencial o híbrido) para adaptarse al 100% a la productividad de tus células de trabajo."
+    answer: "Entendemos el costo operativo de frenar líneas de producción o retirar ingenieros clave. Por ello, Instructor 4.0 opera bajo microcursos ágiles que se agendan in-company en horarios flexibles (presencial o híbrido) para reducir la fricción con la operación diaria."
   },
   {
     question: "¿Qué incluye el costo de la Evaluación Formal Extra de $5,000 MXN?",
@@ -72,7 +72,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "¿Nuestros instructores reciben constancias con registro oficial ante la STPS?",
-    answer: "Sí, absolutamente. Al finalizar y aprobar cada microcurso, se emiten las Constancias de Competencias Laborales (Formato DC-3) registradas ante la Secretaría del Trabajo y Previsión Social (STPS). Estas constancias sustentan legalmente los planes de capacitación de tu empresa y son 100% deducibles de impuestos."
+    answer: "Al finalizar y aprobar cada microcurso, se pueden emitir Constancias de Competencias Laborales (Formato DC-3) cuando aplique conforme a los requisitos del servicio contratado. Estas constancias ayudan a documentar los planes de capacitación de tu empresa."
   },
   {
     question: "¿Cuál es el primer paso para cotizar nuestro proyecto?",
@@ -84,7 +84,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "¿Cómo se maneja la facturación del servicio?",
-    answer: "Se emite factura fiscal correspondiente por cada servicio contratado. Las condiciones específicas de pago se detallan de forma clara y transparente en tu propuesta a la medida, siendo un gasto operativo 100% deducible."
+    answer: "Se emite factura fiscal correspondiente por cada servicio contratado. Las condiciones específicas de pago se detallan de forma clara y transparente en tu propuesta a la medida. La deducibilidad depende del tratamiento contable y fiscal de cada organización."
   }
 ];
 
@@ -125,7 +125,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
       id: "operacion",
       title: "Operación y Adopción",
       struggle: "La capacitación corporativa compite de forma constante con los horarios operativos y metas de entrega de la planta. Retirar al personal por largas jornadas detiene la productividad y genera fricción interna en Recursos Humanos.",
-      solution: "Enfoque de clases modulares. Los microcursos son ágiles, puntales e implementables al instante en el puesto técnico sin interrumpir dinámicas críticas, garantizando excelentes tasas de adopción en la planta.",
+      solution: "Enfoque de clases modulares. Los microcursos son ágiles, puntuales e implementables en el puesto técnico con menor fricción operativa y mejores condiciones para la adopción.",
       icon: "🧩"
     },
     {
@@ -147,84 +147,131 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
   return (
     <div className="animate-in fade-in duration-500">
       {/* Premium Hero Section */}
-      <section className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden bg-white">
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-[500px] h-[500px] bg-brand-yellow/5 rounded-full blur-3xl opacity-50"></div>
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-[400px] h-[400px] bg-brand-vino/5 rounded-full blur-3xl opacity-50"></div>
+      <section className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
+        <div className="absolute top-20 right-4 w-[34rem] h-[34rem] bg-brand-orange/10 rounded-full blur-3xl opacity-70"></div>
+        <div className="absolute bottom-8 left-0 w-[28rem] h-[28rem] bg-brand-learning/10 rounded-full blur-3xl opacity-70"></div>
         
         <div className="container mx-auto px-6 grid lg:grid-cols-12 gap-12 items-center relative z-10">
           <div className="lg:col-span-7">
-            <div className="inline-flex items-center gap-2 bg-brand-orange/10 text-brand-orange border border-brand-orange/20 px-5 py-2.5 rounded-full text-[10px] font-bold tracking-[0.25em] mb-8 shadow-sm uppercase">
-              ★ ALINEACIÓN CORPORATIVA B2B (CONOCER) · EC0217.01 + EC0301
+            <div className="inline-flex items-center gap-2 cademmy-chip text-brand-slate px-5 py-2.5 rounded-full text-[10px] font-bold tracking-[0.22em] mb-8 uppercase">
+              <span className="w-2 h-2 rounded-full bg-brand-red"></span>
+              PROGRAMA CORPORATIVO · 30 HRS + 4 HRS ONLINE · HASTA 30 PARTICIPANTES
             </div>
-            <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-8 leading-[1.1] tracking-tighter">
-              Estandariza tu capacitación interna con <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange via-brand-red to-brand-vino">IA aplicada y evidencia auditable</span>.<br />
-              <span className="text-xl md:text-2xl font-extrabold text-gray-500 block mt-4">Ruta opcional a certificación CONOCER (EC0217.01 + EC0301).</span>
+            <h1 className="font-display text-4xl md:text-6xl font-black text-brand-ink mb-8 leading-[1.04] tracking-tight">
+              Estandariza a tus instructores internos.
             </h1>
-            <p className="text-lg md:text-xl text-gray-600 mb-10 leading-relaxed max-w-2xl font-medium">
-              Diseñado para Dirección de RH y L&D. Convierte expertos técnicos en instructores consistentes con un método único para planear, conducir y evaluar capacitación, generando instrumentos y evidencias por participante para revisión interna y toma de decisiones.
+            <p className="text-lg md:text-xl text-brand-slate mb-8 leading-relaxed max-w-2xl font-medium">
+              Un sistema para que tu capacitación sea consistente, medible y defendible: metodología común, instrumentos de evaluación y evidencias por participante, con IA aplicada para acelerar la planeación sin perder control.
             </p>
+
+            <div className="grid sm:grid-cols-3 gap-3 mb-10 max-w-3xl">
+              {['Menos variabilidad entre instructores', 'Evidencia auditable: instrumentos + trazabilidad', 'Planeación más rápida con IA (con criterios)'].map((chip) => (
+                <div key={chip} className="cademmy-chip rounded-2xl px-4 py-3 text-sm font-bold text-brand-ink">
+                  {chip}
+                </div>
+              ))}
+            </div>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-4">
               <button 
-                onClick={() => document.getElementById('pain-points')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4.5 bg-brand-orange text-white rounded-xl font-bold text-base hover:bg-brand-red transition shadow-lg shadow-brand-orange/20 text-center"
+                onClick={onBookingClick}
+                className="px-8 py-4.5 cademmy-primary rounded-2xl font-bold text-base transition text-center"
               >
-                Ver diagnóstico RH (2 min)
+                Agendar Sesión de Resultados (30 min)
               </button>
               <button 
-                onClick={() => document.getElementById('modules')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-8 py-4.5 bg-gray-900 text-white rounded-xl font-bold text-base hover:bg-black transition text-center shadow-lg shadow-black/10"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-8 py-4.5 glass-panel text-brand-ink rounded-2xl font-bold text-base hover:bg-white/80 transition text-center"
               >
-                Explorar fichas técnicas
+                Solicitar propuesta para mi cohorte
               </button>
             </div>
 
-            <p className="text-xs text-gray-400 font-bold mb-12">
-              *La certificación se obtiene por evaluación y se emite solo si el candidato resulta competente.
+            <p className="text-xs text-brand-muted font-bold mb-12">
+              Ruta opcional a certificación CONOCER: EC0217.01 y EC0301. La certificación se obtiene por evaluación; el certificado se emite solo si el candidato resulta competente.
             </p>
             
             {/* Trust and Compliance Badges for B2B */}
-            <div className="pt-8 border-t border-gray-100 flex flex-wrap gap-x-8 gap-y-4 items-center justify-start text-left">
+            <div className="pt-8 border-t border-white/80 flex flex-wrap gap-x-8 gap-y-4 items-center justify-start text-left">
               <div>
-                <p className="text-[10px] text-gray-400 font-extrabold uppercase tracking-widest mb-1">CONTROL DOC</p>
-                <p className="text-sm font-bold text-gray-700">Evidencia auditable</p>
+                <p className="text-[10px] text-brand-muted font-extrabold uppercase tracking-widest mb-1">CONTROL DOC</p>
+                <p className="text-sm font-bold text-brand-ink">Evidencia trazable</p>
               </div>
-              <div className="sm:border-l sm:border-gray-100 sm:pl-6">
-                <p className="text-[10px] text-gray-400 font-extrabold uppercase tracking-widest mb-1">LEGALIDAD MÉXICO</p>
-                <p className="text-sm font-bold text-gray-700">DC-3 (STPS), ISO 9000</p>
+              <div className="sm:border-l sm:border-white/80 sm:pl-6">
+                <p className="text-[10px] text-brand-muted font-extrabold uppercase tracking-widest mb-1">CUMPLIMIENTO</p>
+                <p className="text-sm font-bold text-brand-ink">Soporte STPS / calidad</p>
               </div>
-              <div className="border-l border-gray-100 pl-6">
-                <p className="text-[10px] text-gray-400 font-extrabold uppercase tracking-widest mb-1 font-sans">RECONOCIMIENTO</p>
-                <p className="text-sm font-bold text-gray-700">Reconocimiento CONOCER</p>
+              <div className="border-l border-white/80 pl-6">
+                <p className="text-[10px] text-brand-muted font-extrabold uppercase tracking-widest mb-1 font-sans">CERTIFICACIÓN</p>
+                <p className="text-sm font-bold text-brand-ink">Ruta opcional CONOCER</p>
               </div>
-              <div className="border-l border-gray-100 pl-6">
-                <p className="text-[10px] text-gray-400 font-extrabold uppercase tracking-widest mb-1">FISCALIDAD</p>
-                <p className="text-sm font-bold text-gray-700">100% facturable</p>
+              <div className="border-l border-white/80 pl-6">
+                <p className="text-[10px] text-brand-muted font-extrabold uppercase tracking-widest mb-1">COMPRAS</p>
+                <p className="text-sm font-bold text-brand-ink">Propuesta formal</p>
               </div>
             </div>
           </div>
           
           <div className="lg:col-span-5 relative">
-            <div className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border-x-4 border-y-4 border-gray-100 flex justify-center bg-gray-50">
-              <img 
-                src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=800" 
-                alt="Directores de capacitación planeando" 
-                className="w-full h-auto object-cover max-h-[500px]" 
-              />
+            <div className="relative z-10 rounded-[2rem] overflow-hidden glass-card p-5 md:p-6">
+              <div className="relative min-h-[430px] rounded-[1.5rem] bg-brand-ink overflow-hidden p-6 md:p-8 text-white">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_28%_18%,rgba(245,130,31,0.35),transparent_18rem),radial-gradient(circle_at_85%_18%,rgba(26,111,232,0.22),transparent_16rem),radial-gradient(circle_at_50%_88%,rgba(31,173,98,0.20),transparent_18rem)]"></div>
+                <div className="absolute right-[-4rem] top-[-4rem] h-48 w-48 rounded-full border-[18px] border-brand-orange/30"></div>
+                <div className="relative z-10 flex items-center justify-between mb-8">
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-[0.28em] text-brand-yellow mb-2">Sistema Instructor 4.0</p>
+                    <h2 className="font-display text-3xl font-black text-white leading-tight">Mapa de estandarización RH</h2>
+                  </div>
+                  <div className="h-14 w-14 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center text-3xl">🎯</div>
+                </div>
+
+                <div className="relative z-10 grid grid-cols-2 gap-4 mb-6">
+                  {[
+                    ['01', 'Método común', 'Encuadre · conducción · cierre'],
+                    ['02', 'Evaluación', 'Rúbricas · listas · guías'],
+                    ['03', 'Evidencia', 'Portafolio por participante'],
+                    ['04', 'IA aplicada', 'Planeación con criterios']
+                  ].map(([num, title, text]) => (
+                    <div key={num} className="rounded-2xl bg-white/10 border border-white/15 p-4 backdrop-blur-md">
+                      <p className="text-brand-yellow font-black text-xs mb-3">{num}</p>
+                      <h3 className="text-white font-bold text-sm mb-1">{title}</h3>
+                      <p className="text-white/60 text-[11px] font-semibold leading-relaxed">{text}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="relative z-10 rounded-2xl bg-white/95 text-brand-ink p-5 shadow-2xl">
+                  <div className="flex items-center justify-between gap-4 mb-4">
+                    <div>
+                      <p className="text-[10px] text-brand-muted uppercase tracking-[0.22em] font-black">Cohorte corporativa</p>
+                      <p className="text-2xl font-black">$67,660 MXN</p>
+                    </div>
+                    <span className="rounded-full bg-brand-certification/10 text-brand-certification px-3 py-1 text-[10px] font-black uppercase tracking-widest">34 hrs</span>
+                  </div>
+                  <div className="h-2 rounded-full bg-brand-muted-bg overflow-hidden">
+                    <div className="h-full w-[72%] rounded-full bg-gradient-to-r from-brand-orange to-brand-red"></div>
+                  </div>
+                  <div className="mt-4 grid grid-cols-3 gap-2 text-center text-[10px] font-bold text-brand-muted">
+                    <span>Diagnóstico</span>
+                    <span>Microcursos</span>
+                    <span>Demo IA</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Pain Points Interactive Diagnostic Section */}
-      <section id="pain-points" className="py-28 bg-gray-50 border-y border-gray-100">
+      <section id="pain-points" className="py-28 border-y border-white/70">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">PORTAL DE DIAGNÓSTICO</span>
-            <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tighter">
+            <h2 className="font-display text-4xl md:text-5xl font-black text-brand-ink tracking-tight">
               ¿Qué impide que tu capacitación sea <span className="text-brand-orange">medible y defendible</span>?
             </h2>
-            <p className="text-gray-500 mt-4 text-lg font-medium leading-relaxed">
+            <p className="text-brand-muted mt-4 text-lg font-medium leading-relaxed">
               Selecciona tus retos principales para ver cómo el sistema Instructor 4.0 te da gobernanza, evidencia y decisiones más claras.
             </p>
           </div>
@@ -238,8 +285,8 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
                   onClick={() => setActivePainTab(index)}
                   className={`p-4 text-left rounded-xl font-bold text-sm transition-all duration-300 flex items-center justify-between border ${
                     activePainTab === index
-                      ? 'bg-brand-vino text-white border-brand-vino shadow-md'
-                      : 'bg-white text-gray-700 border-gray-200 hover:border-brand-orange hover:bg-brand-orange/5'
+                      ? 'bg-brand-ink text-white border-brand-ink shadow-md'
+                      : 'glass-panel text-brand-slate hover:text-brand-ink hover:bg-white/80'
                   }`}
                 >
                   <span className="flex items-center gap-3">
@@ -252,31 +299,31 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
             </div>
 
             {/* Right Display Panel */}
-            <div className="lg:col-span-8 bg-white p-8 md:p-12 rounded-3xl border border-gray-100 shadow-md flex flex-col justify-between">
+            <div className="lg:col-span-8 glass-card p-8 md:p-12 rounded-[2rem] flex flex-col justify-between">
               <div>
                 <span className="text-4xl mb-4 inline-block">{painPoints[activePainTab].icon}</span>
-                <h3 className="text-2xl font-black text-gray-900 mb-6">
+                <h3 className="text-2xl font-black text-brand-ink mb-6">
                   Reto prioritario de RH (según tu selección)
                 </h3>
                 
                 {/* Block: The Struggle */}
-                <div className="mb-8 p-6 bg-red-50 rounded-2xl border border-red-100/60">
+                <div className="mb-8 p-6 bg-brand-red/5 rounded-2xl border border-brand-red/10">
                   <p className="text-[10px] font-bold text-red-600 uppercase tracking-widest mb-2">El Reto en Recursos Humanos</p>
-                  <p className="text-sm text-red-950 font-medium leading-relaxed">
+                  <p className="text-sm text-brand-ink font-medium leading-relaxed">
                     {painPoints[activePainTab].struggle}
                   </p>
                 </div>
 
                 {/* Block: The Solution */}
-                <div className="p-6 bg-green-50 rounded-2xl border border-green-100/60">
-                  <p className="text-[10px] font-bold text-green-600 uppercase tracking-widest mb-2">La Solución Instructor 4.0</p>
-                  <p className="text-sm text-green-950 font-medium leading-relaxed">
+                <div className="p-6 bg-brand-certification/5 rounded-2xl border border-brand-certification/10">
+                  <p className="text-[10px] font-bold text-brand-certification uppercase tracking-widest mb-2">La Solución Instructor 4.0</p>
+                  <p className="text-sm text-brand-ink font-medium leading-relaxed">
                     {painPoints[activePainTab].solution}
                   </p>
                 </div>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-gray-100 flex justify-between items-center text-xs text-gray-400 font-bold uppercase tracking-wider">
+              <div className="mt-8 pt-6 border-t border-white/80 flex justify-between items-center text-xs text-brand-muted font-bold uppercase tracking-wider">
                 <span>Cademmy B2B Consulting Group</span>
                 <span>Paso {activePainTab + 1} de 7</span>
               </div>
@@ -286,55 +333,55 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
       </section>
 
       {/* Corporate Benefits Section */}
-      <section id="benefits" className="py-28 bg-white">
+      <section id="benefits" className="py-28">
         <div className="container mx-auto px-6 text-center mb-20">
           <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">VENTAJA CORPORATIVA</span>
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tighter">
+          <h2 className="font-display text-4xl md:text-5xl font-black text-brand-ink tracking-tight">
             Beneficios para Dirección de RH y L&D
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto text-lg font-medium leading-relaxed mt-4">
+          <p className="text-brand-muted max-w-2xl mx-auto text-lg font-medium leading-relaxed mt-4">
             Lo que obtienes al estandarizar instructores internos: método, evidencia y control (sin frenar operación).
           </p>
         </div>
         <div className="container mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
           {GENERAL_BENEFITS.map((benefit, idx) => (
-            <div key={idx} className="p-8 rounded-3xl bg-gray-50 border border-gray-100 hover:shadow-lg transition duration-300 flex flex-col">
-              <div className="text-4xl mb-6 bg-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm border border-gray-100">{benefit.icon}</div>
-              <h3 className="text-xl font-bold mb-4 text-gray-900 shrink-0">{benefit.title}</h3>
-              <p className="text-gray-600 leading-relaxed font-semibold text-sm flex-1">{benefit.desc}</p>
+            <div key={idx} className="p-8 rounded-[1.75rem] glass-card hover:-translate-y-1 transition duration-300 flex flex-col">
+              <div className="text-4xl mb-6 bg-white/70 w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm border border-white">{benefit.icon}</div>
+              <h3 className="text-xl font-bold mb-4 text-brand-ink shrink-0">{benefit.title}</h3>
+              <p className="text-brand-slate leading-relaxed font-semibold text-sm flex-1">{benefit.desc}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Explanatory Block B2B */}
-      <section className="py-24 bg-gray-50 border-y border-gray-100">
+      <section className="py-24 border-y border-white/70">
         <div className="container mx-auto px-6 max-w-5xl text-center">
-          <h2 className="text-4xl font-black text-gray-900 tracking-tighter mb-6">
+          <h2 className="font-display text-4xl font-black text-brand-ink tracking-tight mb-6">
             Implementación por grupo o generación (sin frenar la operación)
           </h2>
-          <p className="text-lg text-gray-600 mb-16 leading-relaxed max-w-2xl mx-auto font-medium">
+          <p className="text-lg text-brand-muted mb-16 leading-relaxed max-w-2xl mx-auto font-medium">
             Nuestro programa se amolda a tu giro técnico o comercial sin interrumpir las jornadas de trabajo.
           </p>
           <div className="grid md:grid-cols-3 gap-8 text-left">
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition">
+            <div className="glass-card p-8 rounded-[1.75rem] hover:-translate-y-1 transition">
               <div className="text-4xl mb-6">🧩</div>
-              <h3 className="text-lg font-bold mb-3 text-gray-900">1. Diagnóstico y selección por brechas</h3>
-              <p className="text-gray-500 text-sm leading-relaxed font-semibold">
+              <h3 className="text-lg font-bold mb-3 text-brand-ink">1. Diagnóstico y selección por brechas</h3>
+              <p className="text-brand-muted text-sm leading-relaxed font-semibold">
                 Inscribe a tus instructores en los módulos que atacan brechas reales (método, evaluación, evidencia), cuidando agenda y presupuesto.
               </p>
             </div>
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 hover:shadow-md transition">
+            <div className="glass-card p-8 rounded-[1.75rem] hover:-translate-y-1 transition">
               <div className="text-4xl mb-6">🛤️</div>
-              <h3 className="text-lg font-bold mb-3 text-gray-900">2. Ruta completa (método + evidencia)</h3>
-              <p className="text-gray-500 text-sm leading-relaxed font-semibold">
+              <h3 className="text-lg font-bold mb-3 text-brand-ink">2. Ruta completa (método + evidencia)</h3>
+              <p className="text-brand-muted text-sm leading-relaxed font-semibold">
                 Estandariza el ciclo completo: planeación, conducción, evaluación y portafolio para calidad replicable.
               </p>
             </div>
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 border-t-4 border-t-brand-orange hover:shadow-md transition">
+            <div className="glass-card p-8 rounded-[1.75rem] border-t-4 border-t-brand-orange hover:-translate-y-1 transition">
               <div className="text-4xl mb-6">📜</div>
-              <h3 className="text-lg font-bold mb-3 text-gray-900">3. Certificación opcional (por evaluación)</h3>
-              <p className="text-gray-500 text-sm leading-relaxed font-semibold">
+              <h3 className="text-lg font-bold mb-3 text-brand-ink">3. Certificación opcional (por evaluación)</h3>
+              <p className="text-brand-muted text-sm leading-relaxed font-semibold">
                 La certificación nacional oficial (EC0217.01 y EC0301) es opcional y se obtiene a través de un examen independiente. El certificado se emite por CONOCER únicamente al resultar Competente.
               </p>
             </div>
@@ -342,15 +389,52 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
         </div>
       </section>
 
+      {/* Institutional Trust + Demo Proof */}
+      <section className="py-24">
+        <div className="container mx-auto px-6 max-w-6xl grid lg:grid-cols-12 gap-8 items-stretch">
+          <div className="lg:col-span-7 glass-card rounded-[2rem] p-8 md:p-10">
+            <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">CADEMMY</span>
+            <h2 className="font-display text-3xl md:text-4xl font-black text-brand-ink tracking-tight mb-6">
+              Innovación educativa con criterio corporativo
+            </h2>
+            <p className="text-brand-slate leading-relaxed font-medium">
+              En Cademmy impulsamos la transformación de la enseñanza a través de la innovación educativa y la profesionalización de instructores, docentes y facilitadores. Somos una organización especializada en el desarrollo de talento mediante cursos alineados a estándares de competencia laboral avalados por el CONOCER. Combinamos la pedagogía tradicional con herramientas de inteligencia artificial para ofrecer experiencias formativas prácticas, actuales y enfocadas en resultados. Nuestro compromiso es formar líderes de aprendizaje capaces de impactar positivamente en sus entornos educativos y organizacionales.
+            </p>
+          </div>
+
+          <div className="lg:col-span-5 bg-brand-ink text-white rounded-[2rem] p-8 md:p-10 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-brand-orange/20 blur-[90px]"></div>
+            <div className="relative z-10">
+              <span className="text-xs font-bold text-brand-yellow uppercase tracking-[0.3em] mb-4 inline-block">DEMO EN SESIÓN</span>
+              <h2 className="font-display text-3xl font-black text-white tracking-tight mb-6">
+                Diferenciador que sí puedes ver
+              </h2>
+              <div className="space-y-4">
+                {[
+                  'Generador SMART-Bloom: objetivos y secuencias coherentes',
+                  'Portafolio digital: evidencias y trazabilidad por participante',
+                  'Mesa Redonda IA: simulación crítica con retroalimentación'
+                ].map((item) => (
+                  <div key={item} className="flex gap-3 items-start text-sm font-semibold text-white/85">
+                    <span className="mt-1 h-2 w-2 rounded-full bg-brand-certification shrink-0"></span>
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Micro-courses Catalog Section */}
-      <section id="modules" className="py-28 bg-white">
+      <section id="modules" className="py-28">
         <div className="container mx-auto px-6 text-center mb-20">
           <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">FICHA CURRICULAR MODULAR</span>
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tighter">
-            Biblioteca de Módulos (Fichas Técnicas)
+          <h2 className="font-display text-4xl md:text-5xl font-black text-brand-ink tracking-tight">
+            Estructura y calendarización para comité
           </h2>
-          <p className="text-lg text-gray-500 font-medium max-w-3xl mx-auto mt-4">
-            Selecciona los módulos críticos para tu equipo. Configura tu grupo / generación a la medida.
+          <p className="text-lg text-brand-muted font-medium max-w-3xl mx-auto mt-4">
+            Paquete institucional recomendado: 34 horas de taller para hasta 30 participantes. Abajo se muestra el desglose por microcurso para compras, finanzas y planeación de agenda.
           </p>
         </div>
         
@@ -367,17 +451,17 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
 
         {/* Corporate Deliverables Summary */}
         <div className="container mx-auto px-6 mt-32 max-w-6xl">
-          <div className="bg-gray-900 text-white rounded-[3rem] p-12 md:p-20 relative overflow-hidden">
+          <div className="bg-brand-ink text-white rounded-[2rem] p-10 md:p-16 relative overflow-hidden shadow-2xl">
             <div className="absolute top-0 right-0 w-96 h-96 bg-brand-orange blur-[120px] opacity-10"></div>
             <div className="grid lg:grid-cols-2 gap-16 items-center relative z-10">
               <div>
-                <h2 className="text-3xl md:text-5xl font-black mb-8 tracking-tighter">Entregables Ejecutivos para tu Organización:</h2>
+                <h2 className="font-display text-3xl md:text-5xl font-black mb-8 tracking-tight text-white">Entregables ejecutivos para tu organización</h2>
                 <div className="grid gap-6">
                   <div className="flex gap-4">
                     <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-2xl shrink-0">📋</div>
                     <div>
                       <h4 className="font-bold text-white">Manuales de Gobernanza de IA</h4>
-                      <p className="text-sm text-gray-400 font-semibold mt-1">Estructura para el uso inteligente y seguro de herramientas sin fugas de secretos industriales.</p>
+                      <p className="text-sm text-gray-400 font-semibold mt-1">Estructura para el uso inteligente de herramientas con criterios de confidencialidad y control interno.</p>
                     </div>
                   </div>
                   <div className="flex gap-4">
@@ -397,15 +481,15 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
                   <div className="flex gap-4">
                     <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-2xl shrink-0">🛡️</div>
                     <div>
-                      <h4 className="font-bold text-white">Constancias Oficiales STPS (DC-3)</h4>
-                      <p className="text-sm text-gray-400 font-semibold mt-1">Registros con validez oficial ante las inspecciones laborales federales de México.</p>
+                      <h4 className="font-bold text-white">Soporte documental STPS (DC-3)</h4>
+                      <p className="text-sm text-gray-400 font-semibold mt-1">Documentación aplicable para respaldar planes de capacitación cuando corresponda.</p>
                     </div>
                   </div>
                 </div>
               </div>
               <div className="space-y-8">
                 {/* Evolution Visual */}
-                <div className="bg-white/5 p-8 rounded-3xl border border-white/10">
+                <div className="bg-white/5 p-8 rounded-[1.75rem] border border-white/10 backdrop-blur-sm">
                   <h3 className="text-xl font-bold mb-6 text-white uppercase tracking-wider text-xs">Transformación de Capacitación Interna</h3>
                   <div className="space-y-6">
                     <div className="p-4 bg-white/5 rounded-xl border border-white/5">
@@ -415,7 +499,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
                     <div className="flex justify-center text-brand-orange font-bold text-lg">↓</div>
                     <div className="p-4 bg-brand-orange/15 rounded-xl border border-brand-orange/30">
                       <p className="text-[10px] font-bold text-brand-bright-orange uppercase mb-1">Con Instructor 4.0 Corporativo</p>
-                      <p className="text-xs text-white font-medium leading-relaxed">Syllabus unificados, portafolios de evidencias generados con IA, transferencia al puesto y blindaje regulatorio STPS.</p>
+                      <p className="text-xs text-white font-medium leading-relaxed">Syllabus unificados, portafolios de evidencias, trazabilidad y documentación para soporte de cumplimiento.</p>
                     </div>
                   </div>
                 </div>
@@ -426,56 +510,56 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
       </section>
 
       {/* B2B Group Pricing and Plans Section */}
-      <section id="pricing" className="py-28 bg-gray-50 border-t border-gray-100">
+      <section id="pricing" className="py-28 border-t border-white/70">
         <div className="container mx-auto px-6 text-center mb-20">
           <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">FORMALIZACIÓN</span>
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 tracking-tighter">
+          <h2 className="font-display text-4xl md:text-5xl font-black text-brand-ink tracking-tight">
             Planes de Estandarización Corporativa
           </h2>
-          <p className="text-gray-500 max-w-2xl mx-auto text-lg font-medium leading-relaxed mt-4">
+          <p className="text-brand-muted max-w-2xl mx-auto text-lg font-medium leading-relaxed mt-4">
             Selecciona el volumen de profesionalización idóneo para calibrar las competencias formativas de tu negocio:
           </p>
         </div>
 
         <div className="container mx-auto px-6 grid md:grid-cols-3 gap-8 max-w-6xl items-stretch">
           {/* Plan 1 */}
-          <div className="bg-white p-8 rounded-3xl border border-gray-100 flex flex-col justify-between shadow-sm hover:shadow-md transition">
+          <div className="glass-card p-8 rounded-[1.75rem] flex flex-col justify-between hover:-translate-y-1 transition">
             <div>
               <span className="text-[10px] text-brand-vino font-black uppercase tracking-widest bg-brand-vino/10 px-3 py-1.5 rounded-full inline-block mb-6">PROYECTO PILOTO</span>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Plan Iniciador B2B</h3>
-              <p className="text-sm text-gray-500 mb-6 font-medium">Idóneo para equipar y calibrar de 1 a 3 instructores clave internos respetando de forma exacta la tarifa de $1,990 por hora.</p>
+              <h3 className="text-2xl font-bold text-brand-ink mb-2">Plan Iniciador B2B</h3>
+              <p className="text-sm text-brand-muted mb-6 font-medium">Idóneo para equipar y calibrar de 1 a 3 instructores clave internos en la ruta completa de 34 horas de curso.</p>
               <div className="mb-6">
-                <span className="text-4xl font-extrabold text-gray-900">$1,990</span>
-                <span className="text-xs font-bold text-gray-400"> MXN / hora de taller</span>
+                <span className="text-4xl font-extrabold text-brand-ink">$7,990</span>
+                <span className="text-xs font-bold text-brand-muted"> MXN + IVA / instructor</span>
               </div>
-              <ul className="space-y-3 text-xs text-gray-600 font-semibold mb-8">
-                <li className="flex items-center gap-2">✔ Tarifa fija por hora de capacitación grupal</li>
-                <li className="flex items-center gap-2">✔ Agenda adaptada de 34 horas totales</li>
+              <ul className="space-y-3 text-xs text-brand-slate font-semibold mb-8">
+                <li className="flex items-center gap-2">✔ Ruta completa de 34 horas por instructor</li>
+                <li className="flex items-center gap-2">✔ Proyecto piloto para validar adopción y evidencias</li>
                 <li className="flex items-center gap-2">✔ Soporte para registro STPS / formatos DC-3 (cuando aplique, sujeto a regulaciones)</li>
               </ul>
             </div>
             <button 
               onClick={() => onFullCourseClick('plan-iniciador')}
-              className="w-full py-4 bg-gray-100 hover:bg-gray-200 text-gray-900 transition rounded-xl font-bold text-sm uppercase tracking-wider"
+              className="w-full py-4 glass-panel hover:bg-white/80 text-brand-ink transition rounded-2xl font-bold text-sm uppercase tracking-wider"
             >
               Cotizar Plan Iniciador
             </button>
           </div>
 
           {/* Plan 2 */}
-          <div className="bg-white p-8 rounded-3xl border-2 border-brand-orange flex flex-col justify-between shadow-lg relative">
+          <div className="glass-card p-8 rounded-[1.75rem] border-2 border-brand-orange flex flex-col justify-between shadow-lg relative">
             <div className="absolute top-0 right-1/2 translate-x-1/2 -translate-y-1/2 bg-brand-orange text-white text-[9px] font-bold px-4 py-1.5 rounded-full uppercase tracking-widest shadow">
               MÁS SOLICITADO
             </div>
             <div>
               <span className="text-[10px] text-brand-orange font-black uppercase tracking-widest bg-brand-orange/10 px-3 py-1.5 rounded-full inline-block mb-6">ESCALAMIENTO DE EQUIPO</span>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Plan Ruta Unificada</h3>
-              <p className="text-sm text-gray-500 mb-6 font-medium">Profesionaliza equipos enteros (grupo de máximo 30 personas) en el pipeline completo de 34 horas por $67,660 MXN de inversión corporativa.</p>
+              <h3 className="text-2xl font-bold text-brand-ink mb-2">Plan Ruta Unificada</h3>
+              <p className="text-sm text-brand-muted mb-6 font-medium">Profesionaliza equipos enteros (grupo de máximo 30 personas) en el pipeline completo de 34 horas por $67,660 MXN de inversión corporativa.</p>
               <div className="mb-6">
-                <span className="text-4xl font-extrabold text-gray-900">$67,660</span>
-                <span className="text-xs font-bold text-gray-400"> MXN / ruta corporativa total</span>
+                <span className="text-4xl font-extrabold text-brand-ink">$67,660</span>
+                <span className="text-xs font-bold text-brand-muted"> MXN / ruta corporativa total</span>
               </div>
-              <ul className="space-y-3 text-xs text-gray-600 font-semibold mb-8">
+              <ul className="space-y-3 text-xs text-brand-slate font-semibold mb-8">
                 <li className="flex items-center gap-2 text-brand-orange">✔ Los 7 microcursos con 34 horas de instrucción en vivo</li>
                 <li className="flex items-center gap-2">✔ Eliminamos costo extra de alineación grupal</li>
                 <li className="flex items-center gap-2">✔ Expedientes electrónicos para auditorías ISO 9001</li>
@@ -483,23 +567,23 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
             </div>
             <button 
               onClick={() => onFullCourseClick('plan-equipos')}
-              className="w-full py-4 bg-brand-orange hover:bg-brand-red text-white transition rounded-xl font-bold text-sm uppercase tracking-wider shadow-md shadow-brand-orange/20"
+              className="w-full py-4 cademmy-primary transition rounded-2xl font-bold text-sm uppercase tracking-wider"
             >
               Cotizar Plan Equipos
             </button>
           </div>
 
           {/* Plan 3 */}
-          <div className="bg-white p-8 rounded-3xl border border-gray-100 flex flex-col justify-between shadow-sm hover:shadow-md transition">
+          <div className="glass-card p-8 rounded-[1.75rem] flex flex-col justify-between hover:-translate-y-1 transition">
             <div>
               <span className="text-[10px] text-brand-bright-orange font-black uppercase tracking-widest bg-brand-bright-orange/10 px-3 py-1.5 rounded-full inline-block mb-6">CUSTOM CO-CREACIÓN</span>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">In-Company Enterprise</h3>
-              <p className="text-sm text-gray-500 mb-6 font-medium">Adaptación completa a su marca, problemas técnicos y manuales específicos de planta operativa.</p>
+              <h3 className="text-2xl font-bold text-brand-ink mb-2">In-Company Enterprise</h3>
+              <p className="text-sm text-brand-muted mb-6 font-medium">Adaptación completa a su marca, problemas técnicos y manuales específicos de planta operativa.</p>
               <div className="mb-6">
-                <span className="text-4xl font-extrabold text-gray-900">Custom</span>
-                <span className="text-xs font-bold text-gray-400"> / bajo cotización</span>
+                <span className="text-4xl font-extrabold text-brand-ink">Custom</span>
+                <span className="text-xs font-bold text-brand-muted"> / bajo cotización</span>
               </div>
-              <ul className="space-y-3 text-xs text-gray-600 font-semibold mb-8">
+              <ul className="space-y-3 text-xs text-brand-slate font-semibold mb-8">
                 <li className="flex items-center gap-2">✔ Retos construidos con datos propios de su planta</li>
                 <li className="flex items-center gap-2">✔ Portabilidad para sus servidores o LMS</li>
                 <li className="flex items-center gap-2">✔ Auditoría directa y sustento ISO y STPS</li>
@@ -507,7 +591,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
             </div>
             <button 
               onClick={() => onFullCourseClick('plan-enterprise')}
-              className="w-full py-4 bg-gray-900 hover:bg-black text-white transition rounded-xl font-bold text-sm uppercase tracking-wider"
+              className="w-full py-4 bg-brand-ink hover:bg-black text-white transition rounded-2xl font-bold text-sm uppercase tracking-wider"
             >
               Solicitar Propuesta In-Company
             </button>
@@ -521,14 +605,14 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
       </section>
 
       {/* FAQ Accordion Section */}
-      <section id="faq" className="py-28 bg-white border-t border-gray-150">
+      <section id="faq" className="py-28 border-t border-white/70">
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="text-center max-w-2xl mx-auto mb-20">
             <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">SOPORTE Y TRANSPARENCIA</span>
-            <h2 className="text-4xl font-black text-gray-900 tracking-tighter">
+            <h2 className="font-display text-4xl font-black text-brand-ink tracking-tight">
               Preguntas Frecuentes (FAQ)
             </h2>
-            <p className="text-gray-500 mt-4 text-base font-medium leading-relaxed">
+            <p className="text-brand-muted mt-4 text-base font-medium leading-relaxed">
               Resolvemos tus dudas sobre costos, metodologías, certificaciones oficiales de la SEP/CONOCER y la integración in-company de Instructor 4.0.
             </p>
           </div>
@@ -541,21 +625,21 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
                   key={index} 
                   className={`border rounded-2xl transition-all duration-300 overflow-hidden ${
                     isOpen 
-                      ? 'border-brand-orange bg-brand-orange/[0.01]/10 shadow-sm' 
-                      : 'border-gray-200 bg-white hover:border-gray-300'
+                      ? 'border-brand-orange bg-white/70 shadow-sm'
+                      : 'border-white/80 glass-card hover:border-brand-orange/30'
                   }`}
                 >
                   <button
                     onClick={() => setOpenFaq(isOpen ? null : index)}
                     className="w-full text-left px-5 py-4.5 md:px-8 md:py-6 flex justify-between items-center gap-4 outline-none group transition-all"
                   >
-                    <span className={`text-sm md:text-base font-extrabold transition-colors duration-200 ${isOpen ? 'text-brand-orange' : 'text-gray-900 group-hover:text-brand-orange'}`}>
+                    <span className={`text-sm md:text-base font-extrabold transition-colors duration-200 ${isOpen ? 'text-brand-orange' : 'text-brand-ink group-hover:text-brand-orange'}`}>
                       {item.question}
                     </span>
                     <span className={`text-xs font-bold shrink-0 transition-transform duration-300 w-8 h-8 rounded-full flex items-center justify-center border ${
                       isOpen 
                         ? 'border-brand-orange bg-brand-orange/10 text-brand-orange rotate-180' 
-                        : 'border-gray-200 text-gray-500 group-hover:bg-gray-50'
+                        : 'border-white/80 text-brand-muted group-hover:bg-white/70'
                     }`}>
                       ↓
                     </span>
@@ -565,7 +649,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
                       isOpen ? 'max-h-[500px] opacity-100 border-t border-gray-100' : 'max-h-0 opacity-0 pointer-events-none'
                     } overflow-hidden`}
                   >
-                    <div className="px-5 py-4.5 md:px-8 md:py-6 text-xs md:text-sm text-gray-600 leading-relaxed font-semibold">
+                    <div className="px-5 py-4.5 md:px-8 md:py-6 text-xs md:text-sm text-brand-slate leading-relaxed font-semibold">
                       {item.answer}
                     </div>
                   </div>
@@ -577,10 +661,11 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
       </section>
 
       {/* Contact Section B2B Form */}
-      <section id="contact" className="py-28 bg-white border-t border-gray-100">
+      <section id="contact" className="py-28 border-t border-white/70">
         <div className="container mx-auto px-6 max-w-5xl">
-          <div className="bg-gradient-to-r from-brand-vino via-brand-orange to-brand-vino rounded-3xl overflow-hidden shadow-2xl grid md:grid-cols-12 items-stretch border border-white/10">
-            <div className="p-10 md:p-14 md:col-span-6 text-white flex flex-col justify-between">
+          <div className="bg-brand-ink rounded-[2rem] overflow-hidden shadow-2xl grid md:grid-cols-12 items-stretch border border-white/10 relative">
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(245,130,31,0.24),transparent_28rem)]"></div>
+            <div className="p-10 md:p-14 md:col-span-6 text-white flex flex-col justify-between relative z-10">
               <div>
                 <h2 className="text-4xl font-black mb-6 tracking-tighter">Agenda una Sesión de Diagnóstico B2B</h2>
                 <p className="text-base opacity-80 mb-10 font-semibold leading-relaxed">
@@ -605,10 +690,10 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
               </div>
             </div>
             
-            <div className="p-10 md:p-14 bg-white md:col-span-6 flex flex-col justify-center items-center text-center">
+            <div className="p-10 md:p-14 bg-white/90 backdrop-blur-xl md:col-span-6 flex flex-col justify-center items-center text-center relative z-10">
               <div className="w-16 h-16 bg-brand-yellow/10 text-brand-orange rounded-2xl flex items-center justify-center text-3xl mb-6">📆</div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Microsoft Bookings</h3>
-              <p className="text-gray-500 mb-8 font-medium leading-relaxed text-sm">
+              <h3 className="text-2xl font-bold text-brand-ink mb-2">Microsoft Bookings</h3>
+              <p className="text-brand-muted mb-8 font-medium leading-relaxed text-sm">
                 Agenda directamente una llamada estratégica de 15 minutos en el calendario de nuestros especialistas o escanea el QR corporativo.
               </p>
               
@@ -623,7 +708,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
 
               <button 
                 onClick={onBookingClick}
-                className="w-full py-4.5 bg-brand-orange hover:bg-brand-red text-white uppercase tracking-wider rounded-xl font-bold text-sm shadow-md shadow-brand-orange/20 transition-all"
+                className="w-full py-4.5 cademmy-primary uppercase tracking-wider rounded-2xl font-bold text-sm transition-all"
               >
                 Agendar sesión en Bookings ➔
               </button>
