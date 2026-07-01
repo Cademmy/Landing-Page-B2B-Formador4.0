@@ -246,7 +246,7 @@ const ModuleDetail: React.FC<ModuleDetailProps> = ({ module, onBack, onEnroll })
                     <div>
                       <p className="text-[11px] font-bold text-brand-orange">• Promoción de Ruta Completa:</p>
                       <p className="text-[10px] text-brand-slate pl-3 mt-1 leading-normal font-semibold">
-                        Si tu empresa inscribe a su grupo en la <strong>Ruta Completa</strong>, bonificamos en su totalidad el costo de <strong>$5,000 MXN</strong> de la evaluación formal. Solo cubrirán el trámite de emisión de <strong>$1,500 MXN</strong> de aquellos instructores que decidan evaluarse y resulten dictaminados como Competentes.
+                        Si tu empresa inscribe a su grupo en la <strong>Ruta Completa</strong>, bonificamos al 100% el costo de <strong>alineación del estándar</strong>. El certificado se paga únicamente cuando el instructor realiza su evaluación formal y resulta dictaminado como <strong>Competente</strong>.
                       </p>
                     </div>
                     <div className="pt-2 border-t border-gray-150 text-center">

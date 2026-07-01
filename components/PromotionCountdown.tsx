@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 // Single VARIABLE to change the deadline (CDMX Timezone -06:00)
-export const DEADLINE = "2026-06-15T23:59:59-06:00";
-export const DEADLINE_DISPLAY_DATE = "15 de Junio, 2026";
+export const DEADLINE = "2026-08-31T23:59:59-06:00";
+export const DEADLINE_DISPLAY_DATE = "31 de Agosto de 2026";
 
 interface TimeLeft {
   days: string;
@@ -73,21 +73,21 @@ export const PromotionCountdown: React.FC = () => {
           </h3>
 
           <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-6 font-semibold">
-            Si deseas capacitar a tu equipo con la <span className="text-brand-orange font-bold">Ruta Completa (los 7 microcursos del programa)</span>, bonificamos al 100% el costo del estándar de evaluación.
+            Si deseas capacitar a tu equipo con la <span className="text-brand-orange font-bold">Ruta Completa (los 7 microcursos del programa)</span>, bonificamos al 100% el costo de alineación del estándar y solo pagas el certificado cuando, al realizar la evaluación, resulten competentes.
           </p>
 
           <ul className="space-y-3 mb-8 text-xs text-gray-400 font-semibold">
             <li className="flex items-start gap-2">
               <span className="text-brand-orange font-bold">✓</span>
-              <span><strong>Ahorro Directo:</strong> Bonificación de <strong>$5,000 MXN</strong> (que incluye alineación, plan de evaluación y evaluación formal) por participante.</span>
+              <span><strong>Ahorro Directo:</strong> Bonificación del <strong>100% del costo de alineación</strong> del estándar por participante en Ruta Completa.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-brand-orange font-bold">✓</span>
-              <span><strong>Único Costo Aplicable:</strong> Se cubre únicamente el costo de emisión oficial del certificado CONOCER de <strong>$1,500 MXN</strong>, pagadero solo de aquellos candidatos dictaminados como <strong>Competentes</strong>.</span>
+              <span><strong>Certificado solo si procede:</strong> El certificado CONOCER se paga únicamente cuando el candidato realiza su evaluación formal y resulta dictaminado como <strong>Competente</strong>.</span>
             </li>
             <li className="flex items-start gap-2">
               <span className="text-brand-orange font-bold">✓</span>
-              <span><strong>Garantía de Inversión:</strong> Cero riesgo ante auditorías. Solo pagas los certificados gubernamentales de quienes acrediten su estándar.</span>
+              <span><strong>Claridad para compras:</strong> La alineación se bonifica; la evaluación y emisión oficial conservan sus reglas formales ante CONOCER.</span>
             </li>
           </ul>
 

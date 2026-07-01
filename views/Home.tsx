@@ -16,7 +16,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "¿Existe alguna promoción de certificación para mi grupo?",
-    answer: "¡Sí! Si tu grupo o generación se inscribe a la Ruta Completa (los 7 microcursos), se bonifica al 100% el costo de $5,000 MXN correspondiente al proceso de evaluación formal independiente (alineación + plan de evaluación + evaluación en estándares EC0217.01 y EC0301). Bajo este beneficio exclusivo, solo se cubre el trámite indispensable de emisión oficial ante CONOCER de $1,500 MXN por participante, el cual se liquida únicamente cuando el candidato resulta dictaminado como 'Competente'."
+    answer: "Sí. Si tu grupo o generación se inscribe a la Ruta Completa (los 7 microcursos), se bonifica al 100% el costo de alineación del estándar. La evaluación formal y la emisión del certificado CONOCER son procesos independientes; el certificado se paga únicamente cuando el candidato realiza su evaluación y resulta dictaminado como 'Competente'."
   },
   {
     question: "¿A quién va dirigido dentro de la empresa?",
@@ -60,7 +60,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "¿Cuáles son los beneficios corporativos de inscribir a mis instructores a la Ruta Completa?",
-    answer: "El beneficio principal es que si inscribes a tus instructores a toda la ruta completa, eliminamos por completo el costo de la alineación grupal. Tu organización solo cubrirá los procesos individuales indispensables de evaluación formal ($5,000 MXN) y la emisión de certificado ($1,500 MXN) de aquellos facilitadores que decidan acreditarse formalmente ante el CONOCER."
+    answer: "El beneficio principal es que si inscribes a tus instructores a toda la Ruta Completa, bonificamos al 100% el costo de alineación del estándar. Tu organización solo cubre los procesos oficiales que correspondan para quienes decidan evaluarse formalmente; el certificado se paga únicamente cuando el candidato resulta dictaminado como 'Competente'."
   },
   {
     question: "¿Qué pasa si después queremos certificar formalmente a algunos instructores?",
