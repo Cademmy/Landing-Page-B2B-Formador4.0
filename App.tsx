@@ -4,7 +4,6 @@ import Home from './views/Home';
 import ModuleDetail from './views/ModuleDetail';
 import AIChat from './components/AIChat';
 import HubSpotForm from './components/HubSpotForm';
-import VirtualAvatar from './components/VirtualAvatar';
 import { MODULES } from './constants';
 
 const App: React.FC = () => {
@@ -289,7 +288,6 @@ const App: React.FC = () => {
       )}
 
       <AIChat context={contextForAI} />
-      <VirtualAvatar />
     </div>
   );
 };
