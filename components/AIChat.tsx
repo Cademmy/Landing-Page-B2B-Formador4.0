@@ -56,7 +56,7 @@ const AIChat: React.FC<AIChatProps> = ({ context }) => {
           <div className="bg-brand-ink p-4 text-white flex justify-between items-center">
             <div className="flex items-center gap-2">
               <div className="h-9 w-9 rounded-2xl bg-white flex items-center justify-center">
-                <img src="/isologotipo vertical.jpeg" alt="Cademmy" className="h-8 w-8 object-contain" />
+                <img src="/cademmy-isologotipo-vertical.jpeg" alt="Cademmy" className="h-8 w-8 object-contain" />
               </div>
               <div>
                 <span className="block text-sm font-black">Asistente Cademmy</span>
@@ -137,7 +137,7 @@ const AIChat: React.FC<AIChatProps> = ({ context }) => {
           aria-label="Abrir chat de Instructor 4.0"
         >
           <span className="absolute inset-0 rounded-[1.35rem] bg-[radial-gradient(circle_at_35%_25%,rgba(245,130,31,0.22),transparent_3.8rem)]"></span>
-          <img src="/isologotipo vertical.jpeg" alt="" className="relative h-11 w-11 object-contain" />
+          <img src="/cademmy-isologotipo-vertical.jpeg" alt="" className="relative h-11 w-11 object-contain" />
           <span className="absolute -right-1 -top-1 rounded-full bg-brand-ink px-1.5 py-0.5 text-[9px] font-black text-white">
             Chat
           </span>

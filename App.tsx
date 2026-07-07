@@ -112,7 +112,7 @@ const App: React.FC = () => {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
           >
-            <img src="/isologotipo vertical.jpeg" alt="CADEMMY" className="h-16 w-auto" referrerPolicy="no-referrer" />
+            <img src="/cademmy-isologotipo-vertical.jpeg" alt="CADEMMY" className="h-16 w-auto" referrerPolicy="no-referrer" />
           </div>
           
           <div className="hidden md:flex items-center gap-2 glass-panel rounded-full px-3 py-2">
@@ -184,7 +184,7 @@ const App: React.FC = () => {
           <div className="grid md:grid-cols-4 gap-12 mb-16">
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center gap-2 mb-6 justify-center md:justify-start">
-                <img src="/isologotipo vertical.jpeg" alt="CADEMMY LEARNING" className="h-14 w-auto" referrerPolicy="no-referrer" />
+                <img src="/cademmy-isologotipo-vertical.jpeg" alt="CADEMMY LEARNING" className="h-14 w-auto" referrerPolicy="no-referrer" />
               </div>
               <p className="text-brand-muted max-w-sm mx-auto md:mx-0 mb-6 leading-relaxed font-medium">
                 Potenciamos tu perfil profesional con tecnología de vanguardia y certificaciones oficiales CONOCER.
