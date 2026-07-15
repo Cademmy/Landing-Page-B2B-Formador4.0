@@ -181,7 +181,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "¿Este entrenamiento interrumpe la operación diaria de nuestra planta?",
-    answer: "Entendemos el costo operativo de frenar líneas de producción o retirar ingenieros clave. Por ello, Instructor 4.0 opera bajo microcursos ágiles que se agendan in-company en horarios flexibles (presencial o híbrido) para reducir la fricción con la operación diaria."
+    answer: "Entendemos el costo operativo de frenar líneas de producción o retirar ingenieros clave. Por ello, Instructor 4.0 opera bajo microcursos ágiles que se agendan en formatos flexibles: presencial, síncrono + asíncrono con videollamada semanal de dudas, o 100% en línea, para reducir la fricción con la operación diaria."
   },
   {
     question: "¿Qué incluye el costo de la Evaluación Formal Extra de $5,000 MXN?",
@@ -213,7 +213,7 @@ const FAQ_ITEMS = [
   },
   {
     question: "¿Qué información debo tener lista para la sesión de diagnóstico?",
-    answer: "Te sugerimos tener a la mano el número estimado de participantes, el tipo de instructores que vas a capacitar (expertos puramente técnicos, supervisores o instructores de habilidades blandas), la modalidad que prefieren (presencial, online o híbrida) y si cuentan hoy con requerimientos rígidos de auditorías (ISO, auditorías de clientes, regulaciones STPS o comités internos)."
+    answer: "Te sugerimos tener a la mano el número estimado de participantes, el tipo de instructores que vas a capacitar (expertos puramente técnicos, supervisores o instructores de habilidades blandas), la modalidad que prefieren (presencial, síncrona + asíncrona con videollamada semanal de dudas, o 100% en línea) y si cuentan hoy con requerimientos rígidos de auditorías (ISO, auditorías de clientes, regulaciones STPS o comités internos)."
   },
   {
     question: "¿Cómo se maneja la facturación del servicio?",
@@ -338,7 +338,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
           <div className="lg:col-span-7">
             <div className="inline-flex items-center gap-2 cademmy-chip text-brand-slate px-5 py-2.5 rounded-full text-[10px] font-bold tracking-[0.22em] mb-8 uppercase">
               <span className="w-2 h-2 rounded-full bg-brand-red"></span>
-              SISTEMA DE GOBERNANZA · 30 HRS + 4 HRS ONLINE · HASTA 30 PARTICIPANTES
+              SISTEMA DE GOBERNANZA · PRESENCIAL · SÍNCRONO + ASÍNCRONO · 100% EN LÍNEA
             </div>
             <h1 className="font-display text-4xl md:text-6xl font-black text-brand-ink mb-8 leading-[1.04] tracking-tight">
               ¿Capacitas constantemente, pero no puedes demostrar su impacto en la operación?
