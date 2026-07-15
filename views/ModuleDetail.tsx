@@ -239,7 +239,7 @@ const ModuleDetail: React.FC<ModuleDetailProps> = ({ module, onBack, onEnroll })
                     <div>
                       <p className="text-[11px] font-bold text-brand-ink">• Costos Sin Promoción (Por persona):</p>
                       <p className="text-[10px] text-brand-muted pl-3 mt-1 leading-normal">
-                        - <strong>Evaluación Formal Completa:</strong> $5,000 MXN (incluye alineación final individual, plan de evaluación estructurado y el examen formal). NO es el costo por el portafolio integrado del microcurso.<br/>
+                        - <strong>Evaluación Formal Completa:</strong> $5,000 MXN (incluye alineación final individual, plan de evaluación estructurado y la evaluación por competencias). NO es el costo por el portafolio integrado del microcurso.<br/>
                         - <strong>Emisión de Certificado:</strong> $1,500 MXN (se liquida única y exclusivamente al resultar Competente).
                       </p>
                     </div>

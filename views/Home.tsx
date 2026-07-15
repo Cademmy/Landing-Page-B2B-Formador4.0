@@ -719,7 +719,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
               <div className="text-4xl mb-6">📜</div>
               <h3 className="text-lg font-bold mb-3 text-brand-ink">3. Certificación opcional (por evaluación)</h3>
               <p className="text-brand-muted text-sm leading-relaxed font-semibold">
-                La certificación nacional oficial (EC0217.01 y EC0301) es opcional y se obtiene a través de un examen independiente. El certificado se emite por CONOCER únicamente al resultar Competente.
+                La certificación nacional oficial (EC0217.01 y EC0301) es opcional y se obtiene a través de una evaluación por competencias independiente. El certificado se emite por CONOCER únicamente al resultar Competente.
               </p>
             </div>
           </div>
