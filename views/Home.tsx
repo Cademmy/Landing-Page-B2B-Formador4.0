@@ -341,10 +341,10 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
               SISTEMA DE GOBERNANZA · 30 HRS + 4 HRS ONLINE · HASTA 30 PARTICIPANTES
             </div>
             <h1 className="font-display text-4xl md:text-6xl font-black text-brand-ink mb-8 leading-[1.04] tracking-tight">
-              Estandariza toda la capacitación de tu organización.
+              ¿Capacitas constantemente, pero no puedes demostrar su impacto en la operación?
             </h1>
             <p className="text-lg md:text-xl text-brand-slate mb-8 leading-relaxed max-w-2xl font-medium">
-              Cuando cada instructor enseña diferente, la organización pierde consistencia, evidencia y capacidad para demostrar resultados. Instructor 4.0 convierte la capacitación en un sistema institucional medible, auditable y escalable.
+              Instructor 4.0 convierte la capacitación interna en un sistema consistente, medible y defendible: metodología común, instrumentos de evaluación y evidencias por participante, con IA aplicada bajo criterios.
             </p>
 
             <div className="grid sm:grid-cols-4 gap-3 mb-10 max-w-4xl">
