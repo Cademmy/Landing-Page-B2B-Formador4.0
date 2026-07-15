@@ -88,7 +88,7 @@ const App: React.FC = () => {
 
   const contextForAI = currentView.type === 'detail' && selectedModule
     ? `Microcurso actual: ${selectedModule.title}. ID: ${selectedModule.id}. Objetivo general: ${selectedModule.objective}. Temario: ${JSON.stringify(selectedModule.subtopics)}. Inversión Individual: $${selectedModule.priceB2C} MXN. Inversión Corporativa B2B de grupo: $${selectedModule.priceB2B} MXN. Nota de transparencia: Instructor 4.0 ayuda a estandarizar capacitación, generar instrumentos y preparar evidencia; no garantiza certificación ni cumplimiento automático.`
-    : `Página principal de Instructor 4.0 como sistema de gobernanza de capacitación corporativa. El objetivo es estandarizar instructores internos, generar método común, instrumentos de evaluación, portafolios de evidencia e IA con criterios. La ruta opcional a certificación CONOCER EC0217.01 y EC0301 depende de evaluación formal independiente y dictamen competente.`;
+    : `Página principal de Instructor 4.0 como sistema de profesionalización de capacitación corporativa. El objetivo es convertir expertos internos en instructores con método, generar instrumentos de evaluación, portafolios de evidencia e IA con criterios. La ruta opcional a certificación CONOCER EC0217.01 y EC0301 depende de evaluación formal independiente y dictamen competente.`;
 
   const getStripePrice = () => {
     if (showStripeSimulation.enrollId === 'full') {
@@ -182,7 +182,7 @@ const App: React.FC = () => {
                 <img src="/cademmy-isologotipo-vertical.jpeg" alt="CADEMMY LEARNING" className="h-14 w-auto" referrerPolicy="no-referrer" />
               </div>
               <p className="text-brand-muted max-w-sm mx-auto md:mx-0 mb-6 leading-relaxed font-medium">
-                Sistema de gobernanza para estandarizar capacitación corporativa, documentar evidencia y profesionalizar instructores internos con IA aplicada bajo criterios.
+                Sistema de profesionalización para estandarizar capacitación corporativa, documentar evidencia y convertir expertos internos en instructores con método.
               </p>
             </div>
             

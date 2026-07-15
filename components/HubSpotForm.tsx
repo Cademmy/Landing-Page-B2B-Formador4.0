@@ -12,7 +12,7 @@ interface HubSpotFormProps {
 }
 
 const HubSpotForm: React.FC<HubSpotFormProps> = ({ requirement, price }) => {
-  const defaultRequirement = 'Diagnóstico Ejecutivo - Sistema de Gobernanza de Capacitación';
+  const defaultRequirement = 'Diagnóstico Ejecutivo - Profesionalización de Capacitación Interna';
   const defaultPrice = 'A definir según alcance y cohorte';
 
   useEffect(() => {

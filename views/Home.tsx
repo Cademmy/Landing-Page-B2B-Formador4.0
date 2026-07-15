@@ -61,7 +61,7 @@ const getMaturityResult = (answers: DiagnosticAnswer[], items: DiagnosticItem[])
     governanceScore <= 1
       ? { name: 'Nivel 1: Reactivo', width: '25%', tone: 'bg-brand-red', summary: 'La capacitación depende principalmente de esfuerzos individuales y documentación dispersa.' }
       : governanceScore <= 3
-        ? { name: 'Nivel 2: Documentado', width: '50%', tone: 'bg-brand-orange', summary: 'Ya existen prácticas útiles, pero todavía falta estandarización y comparabilidad entre instructores.' }
+        ? { name: 'Nivel 2: Documentado', width: '50%', tone: 'bg-brand-orange', summary: 'Ya existen prácticas útiles, pero todavía falta método común y comparabilidad entre instructores.' }
         : governanceScore <= 5
           ? { name: 'Nivel 3: Estandarizado', width: '75%', tone: 'bg-brand-yellow', summary: 'La organización tiene bases claras para operar con método común y fortalecer trazabilidad.' }
           : { name: 'Nivel 4: Instructor 4.0', width: '100%', tone: 'bg-brand-certification', summary: 'La capacitación puede gestionarse como una operación medible, documentada y escalable.' };
@@ -84,7 +84,7 @@ const getMaturityResult = (answers: DiagnosticAnswer[], items: DiagnosticItem[])
     strengths,
     gaps,
     actions: gaps.length
-      ? ['Priorizar brechas con mayor impacto documental.', 'Definir una metodología común de conducción y evaluación.', 'Preparar una cohorte piloto con entregables verificables.']
+      ? ['Priorizar brechas que afectan la transferencia al puesto.', 'Definir una metodología común de conducción y evaluación.', 'Preparar una cohorte piloto con entregables verificables.']
       : ['Conservar el método actual como línea base.', 'Formalizar indicadores de trazabilidad.', 'Preparar expansión entre áreas o sedes.']
   };
 };
@@ -92,8 +92,8 @@ const getMaturityResult = (answers: DiagnosticAnswer[], items: DiagnosticItem[])
 const ORG_BENEFITS = [
   {
     icon: '📈',
-    title: 'ROI más defendible',
-    desc: 'Cada acción de capacitación se conecta con objetivos, instrumentos y evidencias, facilitando explicar al comité qué se midió y con qué criterios.'
+    title: 'Impacto más defendible',
+    desc: 'Cada capacitación se conecta con objetivos, actividades, instrumentos y evidencias, facilitando explicar al comité qué se midió y cómo se relaciona con la operación.'
   },
   {
     icon: '🗂️',
@@ -102,8 +102,8 @@ const ORG_BENEFITS = [
   },
   {
     icon: '🧭',
-    title: 'Método común',
-    desc: 'La organización deja de depender del estilo individual de cada instructor y habilita una forma consistente de planear, impartir y cerrar sesiones.'
+    title: 'Expertos con método',
+    desc: 'Tus expertos internos dejan de capacitar solo “como aprendieron” y cuentan con una forma consistente de planear, impartir, evaluar y cerrar sesiones.'
   },
   {
     icon: '🧪',
@@ -117,34 +117,34 @@ const ORG_BENEFITS = [
   },
   {
     icon: '🤖',
-    title: 'IA con gobernanza',
-    desc: 'La IA acelera planeación y documentación bajo criterios, prompts y lineamientos, reduciendo improvisación y variabilidad en los materiales.'
+    title: 'IA con criterios',
+    desc: 'La IA acelera planeación y documentación bajo lineamientos claros, reduciendo improvisación y variabilidad en materiales, actividades e instrumentos.'
   }
 ];
 
 const FAQ_ITEMS = [
   {
     question: "¿Qué es Instructor/Formador 4.0 para empresas?",
-    answer: "Es un sistema de estandarización para instructores internos: proporciona una metodología común para planear, impartir y evaluar capacitación, generando instrumentos y evidencias por participante acelerado por herramientas digitales e Inteligencia Artificial."
+    answer: "Es un sistema de profesionalización para instructores internos: ayuda a que expertos técnicos que aprendieron sobre la marcha conviertan su conocimiento en capacitación estructurada, medible y transferible al puesto."
   },
   {
     question: "¿Es un curso, una metodología o una plataforma?",
-    answer: "Es una metodología de gobernanza de capacitación implementada mediante talleres, microcursos, instrumentos y herramientas digitales. No sustituye tu LMS ni tus procesos internos; los complementa con método común, evidencia y criterios de evaluación."
+    answer: "Es una metodología de profesionalización de capacitación implementada mediante talleres, microcursos, instrumentos y herramientas digitales. No sustituye tu LMS ni tus procesos internos; los complementa con método común, evidencia y criterios de evaluación."
   },
   {
     question: "¿Cómo justifico la inversión ante un comité?",
-    answer: "La conversación se plantea desde brechas de negocio: variabilidad entre instructores, trazabilidad, evidencia, evaluación y riesgo documental. En la sesión ejecutiva revisamos alcance, entregables, cohorte, calendario e indicadores que pueden respaldar la propuesta."
+    answer: "La conversación se plantea desde brechas de negocio: expertos que capacitan sin metodología, baja transferencia al puesto, variabilidad entre instructores, evidencia, evaluación y riesgo documental. En la sesión ejecutiva revisamos alcance, entregables, cohorte, calendario e indicadores que pueden respaldar la propuesta."
   },
   {
     question: "¿Cómo se mide el nivel de madurez?",
-    answer: "La página usa un diagnóstico orientativo de 7 riesgos. El nivel se calcula con una lógica simple: mientras menos riesgos activos existan, mayor madurez de gobernanza. No sustituye una auditoría ni una consultoría formal; ayuda a preparar la conversación ejecutiva."
+    answer: "La página usa un diagnóstico orientativo de 7 riesgos. El nivel se calcula con una lógica simple: mientras menos riesgos activos existan, mayor capacidad para operar capacitación interna con método, evidencia y trazabilidad. No sustituye una auditoría ni una consultoría formal; ayuda a preparar la conversación ejecutiva."
   },
   {
     question: "¿Sustituye nuestro LMS actual?",
     answer: "No. Instructor 4.0 puede convivir con un LMS existente porque se enfoca en método, instrumentos, evidencia y competencias del instructor. El LMS puede seguir funcionando como repositorio o canal de distribución."
   },
   {
-    question: "¿Qué significa IA con gobernanza?",
+    question: "¿Qué significa IA con criterios?",
     answer: "Significa usar IA con lineamientos, prompts, criterios de revisión y control humano. La IA acelera planeación y documentación, pero las decisiones metodológicas y la validación final permanecen en manos del equipo responsable."
   },
   {
@@ -238,8 +238,8 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
       id: "roi",
       title: "Impacto y ROI",
       question: "¿Hoy puedes demostrar con evidencia qué cambió después de capacitar?",
-      struggle: "Capacitas habilidades blandas o técnicas, pero los resultados no se vuelven observables y comparables. Te cuesta justificar inversión porque falta un sistema de objetivos, instrumentos y evidencias por participante.",
-      solution: "Instructor 4.0 conecta objetivos, actividades e instrumentos para generar evidencia por participante y criterios comparables entre grupos. La capacitación deja de ser “solo horas” y se vuelve una mejora verificable.",
+      struggle: "Tus expertos internos pueden dominar la operación, pero si capacitan sin objetivos claros ni instrumentos, el resultado no se vuelve observable ni comparable. Te cuesta justificar inversión porque no hay evidencia de transferencia al puesto.",
+      solution: "Instructor 4.0 conecta objetivos, actividades e instrumentos para generar evidencia por participante y criterios comparables entre grupos. La capacitación deja de ser “solo horas impartidas” y se convierte en una práctica verificable.",
       feedbackYes: "Esta brecha suele aparecer cuando la capacitación se gestiona como evento y no como operación medible.",
       feedbackNo: "Buen punto de partida: si ya existe evidencia, el siguiente paso es hacerla comparable y gobernable.",
       icon: "📈"
@@ -249,7 +249,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
       title: "Auditoría y Evidencias",
       question: "¿Tu evidencia principal sigue siendo asistencia y encuestas de satisfacción?",
       struggle: "Solo tienes carpetas de hojas firmadas como listas de asistencia y encuestas superficiales de satisfacción (las cuales no prueban aprendizaje). Ante auditorías de calidad o sistemas de gestión interna, la capacitación es difícil de sustentar técnicamente.",
-      solution: "Creamos portafolios de evidencias digitales de cada participante, listos en segundos. Esto te otorga un expediente transparente con listas de cotejo, resultados ponderados, firmas de acuerdos y rúbricas analíticas estructuradas.",
+      solution: "Estructuramos portafolios de evidencias digitales por participante. Esto te otorga un expediente transparente con listas de cotejo, resultados ponderados, acuerdos de aprendizaje y rúbricas analíticas estructuradas.",
       feedbackYes: "Aquí existe una oportunidad clara: transformar registros administrativos en evidencia de aprendizaje.",
       feedbackNo: "Eso indica una base documental valiosa. Conviene revisar si es consistente entre áreas e instructores.",
       icon: "📊"
@@ -258,8 +258,8 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
       id: "estandar",
       title: "Estandarización",
       question: "¿Cada instructor interno imparte con un estilo y criterio diferente?",
-      struggle: "Tu capacitación interna es inconsistente. Dependes de un 'instructor estrella' empírico; si esa persona se va o es promovida, todo el know-how metodológico de impartición técnica se pierde o se diluye, creando silos de información.",
-      solution: "Institucionaliza un protocolo oficial corporativo uniforme de encuadre, conducción participativa, cierre, medición de conocimientos y archivo documental, de tal modo que cualquier experto técnico pueda dar clases con el mismo estándar de calidad.",
+      struggle: "Tu capacitación interna es inconsistente. Dependes de expertos que enseñan como aprendieron: con buena intención, pero sin una estructura común para convertir experiencia en competencias transferibles.",
+      solution: "Institucionaliza un método común de encuadre, conducción participativa, cierre, medición y archivo documental, para que cualquier experto técnico pueda capacitar con criterios comparables.",
       feedbackYes: "La variabilidad no siempre se ve como riesgo hasta que se intenta escalar o auditar la capacitación.",
       feedbackNo: "Si ya existe consistencia, el sistema puede ayudar a documentarla y volverla replicable.",
       icon: "🧬"
@@ -268,8 +268,8 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
       id: "evaluacion",
       title: "Evaluación Científica",
       question: "¿Los aprendizajes se evalúan más por criterio personal que por instrumentos compartidos?",
-      struggle: "No existen rúbricas ni criterios formales de calificación; la asimilación del staff se evalúa 'a ojo' u ojeando un cuestionario de memoria superficial, lo cual no comprueba destrezas de desempeño práctico en su área operativa diaria.",
-      solution: "Enseñamos a tus instructores a formular e implementar Guías de Observación de comportamientos de seguridad, Listas de Cotejo de entregables físicos corporativos y Rúbricas analíticas robustas, calibrándolas de forma guiada para eliminar errores.",
+      struggle: "No existen rúbricas ni criterios formales de calificación; la asimilación del aprendizaje se evalúa 'a ojo' o con cuestionarios superficiales, lo cual no comprueba desempeño práctico en el área operativa.",
+      solution: "Tus instructores aprenden a formular e implementar guías de observación, listas de cotejo y rúbricas analíticas, calibradas para medir desempeño y no solo asistencia.",
       feedbackYes: "La medición subjetiva limita la comparabilidad entre grupos y debilita las decisiones de desarrollo.",
       feedbackNo: "Tener instrumentos compartidos reduce fricción para escalar calidad y defender resultados.",
       icon: "⚖️"
@@ -290,7 +290,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
       question: "¿Tu equipo usa IA sin lineamientos, criterios o revisión metodológica?",
       struggle: "Temes que el staff de instructores utilice herramientas de IA libres para generar materiales inconsistentes, erróneos, de baja calidad o que vulneren las políticas corporativas de confidencialidad y marca del negocio.",
       solution: "Instauramos directrices claras de IA aplicada con control y criterios. Tu equipo es capacitado utilizando un manual de buenas prácticas, prompts oficiales autorizados y criterios estrictos de curaduría para que RH no pierda el control.",
-      feedbackYes: "La velocidad sin criterios puede multiplicar errores. La IA necesita gobernanza, no solo acceso.",
+      feedbackYes: "La velocidad sin criterios puede multiplicar errores. La IA necesita lineamientos, no solo acceso.",
       feedbackNo: "Excelente: los lineamientos son una ventaja si se conectan con entregables e indicadores.",
       icon: "🤖"
     },
@@ -338,17 +338,17 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
           <div className="lg:col-span-7">
             <div className="inline-flex items-center gap-2 cademmy-chip text-brand-slate px-5 py-2.5 rounded-full text-[10px] font-bold tracking-[0.22em] mb-8 uppercase">
               <span className="w-2 h-2 rounded-full bg-brand-red"></span>
-              SISTEMA DE GOBERNANZA · PRESENCIAL · SÍNCRONO + ASÍNCRONO · 100% EN LÍNEA
+              CAPACITACIÓN INTERNA MEDIBLE · INSTRUCTORES CON MÉTODO · EVIDENCIA POR PARTICIPANTE
             </div>
             <h1 className="font-display text-4xl md:text-6xl font-black text-brand-ink mb-8 leading-[1.04] tracking-tight">
               ¿Capacitas constantemente, pero no puedes demostrar su impacto en la operación?
             </h1>
             <p className="text-lg md:text-xl text-brand-slate mb-8 leading-relaxed max-w-2xl font-medium">
-              Instructor 4.0 convierte la capacitación interna en un sistema consistente, medible y defendible: metodología común, instrumentos de evaluación y evidencias por participante, con IA aplicada bajo criterios.
+              Cuando tus expertos capacitan sin metodología, el problema no siempre se ve en el aula: aparece después en la operación. Instructor 4.0 profesionaliza a tus instructores internos para convertir experiencia técnica en objetivos, actividades, evaluación y evidencias por participante.
             </p>
 
             <div className="grid sm:grid-cols-4 gap-3 mb-10 max-w-4xl">
-              {['Método institucional', 'Evidencia por participante', 'IA con gobernanza', 'Ruta opcional a certificación'].map((chip) => (
+              {['Expertos con método', 'Transferencia al puesto', 'Evidencia por participante', 'IA con criterios'].map((chip) => (
                 <div key={chip} className="cademmy-chip rounded-2xl px-4 py-3 text-sm font-bold text-brand-ink">
                   {chip}
                 </div>
@@ -446,16 +446,46 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
         </div>
       </section>
 
+      {/* Hidden Cost of Empirical Training */}
+      <section className="py-24 border-y border-white/70">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="grid lg:grid-cols-12 gap-10 items-start">
+            <div className="lg:col-span-5">
+              <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">BRECHA OCULTA PARA RH</span>
+              <h2 className="font-display text-4xl md:text-5xl font-black text-brand-ink tracking-tight mb-6">
+                El experto sabe hacer el trabajo. No siempre sabe enseñarlo.
+              </h2>
+              <p className="text-lg text-brand-muted font-medium leading-relaxed">
+                Muchas empresas promueven a sus mejores técnicos, supervisores o especialistas como capacitadores internos. La intención es correcta, pero sin metodología pueden transmitir experiencia de forma desordenada, difícil de medir y poco transferible al puesto.
+              </p>
+            </div>
+            <div className="lg:col-span-7 grid sm:grid-cols-2 gap-5">
+              {[
+                ['Lo que RH ve', 'Sesiones impartidas, listas de asistencia y participantes satisfechos.'],
+                ['Lo que no siempre se ve', 'Objetivos poco claros, criterios distintos y aprendizaje que no llega al campo.'],
+                ['Riesgo operativo', 'Errores repetidos, dependencia del instructor estrella y baja preservación del know-how.'],
+                ['Lo que cambia con Instructor 4.0', 'Experiencia técnica convertida en objetivos, actividades, instrumentos y evidencias verificables.']
+              ].map(([title, copy]) => (
+                <div key={title} className="glass-card rounded-[1.75rem] p-6">
+                  <h3 className="text-lg font-black text-brand-ink mb-3">{title}</h3>
+                  <p className="text-sm text-brand-slate font-semibold leading-relaxed">{copy}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Diagnostic Section */}
       <section id="pain-points" className="py-28 border-y border-white/70">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">PORTAL DE DIAGNÓSTICO</span>
             <h2 className="font-display text-4xl md:text-5xl font-black text-brand-ink tracking-tight">
-              ¿Cuántos de estos 7 riesgos existen actualmente en tu organización?
+              ¿Tus expertos capacitan con método o solo desde la experiencia?
             </h2>
             <p className="text-brand-muted mt-4 text-lg font-medium leading-relaxed">
-              Responde con criterio ejecutivo. Al final verás un nivel de madurez y una ruta inicial para conversar con tu comité.
+              Responde con criterio ejecutivo. Al final verás qué brechas pueden estar afectando la transferencia al puesto, la medición y la evidencia ante tu comité.
             </p>
           </div>
 
@@ -570,7 +600,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
                 <div className="h-3 rounded-full bg-white/80 overflow-hidden mb-3">
                   <div className={`h-full rounded-full ${diagnosticResult.level.tone} transition-all duration-500`} style={{ width: diagnosticResult.level.width }} />
                 </div>
-                <p className="text-xs text-brand-muted font-bold">Lógica: menor número de riesgos activos = mayor madurez de gobernanza.</p>
+                <p className="text-xs text-brand-muted font-bold">Lógica: menor número de riesgos activos = mayor capacidad para capacitar con método y evidencia.</p>
               </div>
               <div className="lg:col-span-7 grid md:grid-cols-2 gap-4">
                 <div className="rounded-2xl bg-white/70 border border-white p-5">
@@ -627,9 +657,9 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
               </div>
             </div>
             <div className="glass-card rounded-[2rem] p-8 border-t-4 border-t-brand-certification">
-              <p className="text-xs font-black uppercase tracking-[0.3em] text-brand-certification mb-5">Después: gobernanza de capacitación</p>
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-brand-certification mb-5">Después: capacitación interna con método</p>
               <div className="grid sm:grid-cols-2 gap-3">
-                {['Método institucional', 'Portafolio por participante', 'Rúbricas compartidas', 'Comparabilidad', 'Gobernanza', 'Documentación estructurada', 'Evidencia verificable', 'Escalabilidad entre áreas e instructores'].map((item) => (
+                {['Método institucional', 'Portafolio por participante', 'Rúbricas compartidas', 'Comparabilidad', 'Criterios comunes', 'Documentación estructurada', 'Evidencia verificable', 'Escalabilidad entre áreas e instructores'].map((item) => (
                   <div key={item} className="rounded-2xl bg-brand-certification/5 border border-brand-certification/10 p-4 text-sm font-bold text-brand-slate">{item}</div>
                 ))}
               </div>
@@ -897,7 +927,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
               {[
                 ['Alineación metodológica', 'El contenido toma como referencia competencias de EC0217.01 y EC0301 sin presentarse como certificación automática.'],
                 ['Evaluación separada', 'La evaluación formal y emisión de certificados CONOCER son procesos independientes y dependen del dictamen competente.'],
-                ['Gobernanza documental', 'El sistema prioriza instrumentos, portafolios y evidencia organizada para soporte interno.'],
+                ['Documentación defendible', 'El sistema prioriza instrumentos, portafolios y evidencia organizada para soporte interno.'],
                 ['IA bajo criterio', 'La IA se usa como apoyo para planeación y evaluación, manteniendo revisión humana y criterios institucionales.']
               ].map(([title, text]) => (
                 <div key={title} className="rounded-2xl bg-white/70 border border-white p-5">
@@ -944,7 +974,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
                   <div className="flex gap-4">
                     <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-2xl shrink-0">📋</div>
                     <div>
-                      <h4 className="font-bold text-white">Manuales de Gobernanza de IA</h4>
+                      <h4 className="font-bold text-white">Manuales de IA con criterios</h4>
                       <p className="text-sm text-gray-400 font-semibold mt-1">Estructura para el uso inteligente de herramientas con criterios de confidencialidad y control interno.</p>
                     </div>
                   </div>
@@ -1039,7 +1069,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
             <div>
               <span className="text-[10px] text-brand-orange font-black uppercase tracking-widest bg-brand-orange/10 px-3 py-1.5 rounded-full inline-block mb-6">ESCALAMIENTO DE EQUIPO</span>
               <p className="text-xs font-black uppercase tracking-widest text-brand-orange mb-2">Obtienes</p>
-              <h3 className="text-2xl font-bold text-brand-ink mb-2">Gobernanza para una cohorte completa</h3>
+              <h3 className="text-2xl font-bold text-brand-ink mb-2">Profesionalización para una cohorte completa</h3>
               <p className="text-sm text-brand-muted mb-6 font-medium">Implementa el sistema con hasta 30 participantes: método común, instrumentos, evidencia y ruta opcional a certificación.</p>
               <div className="mb-6">
                 <span className="text-4xl font-extrabold text-brand-ink">$67,660</span>
