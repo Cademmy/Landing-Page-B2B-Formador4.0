@@ -87,8 +87,8 @@ const App: React.FC = () => {
   };
 
   const contextForAI = currentView.type === 'detail' && selectedModule
-    ? `Microcurso actual: ${selectedModule.title}. ID: ${selectedModule.id}. Objetivo general: ${selectedModule.objective}. Temario: ${JSON.stringify(selectedModule.subtopics)}. Inversión Individual: $${selectedModule.priceB2C} MXN. Inversión Corporativa B2B de grupo: $${selectedModule.priceB2B} MXN. Nota clave de cumplimiento: Ofrecemos Constancias oficiales STPS DC-3, alineación al estándar CONOCER (EC0217.01 + EC0301), y portafolios de evidencias digitales que cumplen con auditorías ISO 9001.`
-    : `Página principal de Instructor 4.0 (B2B Corporativo). Ruta modular de 7 microcursos orientados a Capacitación de Instructores Internos con IA y Metodología CONOCER. Ofrecemos Constancias oficiales STPS DC-3, facturación y deducibilidad fiscal SAT en México, alineación a auditorías ISO 9001. Aclaración de Certificación SEP CONOCER: El curso prepara de forma experta a los instructores; la evaluación oficial es formal dictada por el organismo certificador y la emisión del certificado se paga únicamente si resulta competente. Si se inscribe a toda la ruta completa grupal, eliminamos el costo de alineación.`;
+    ? `Microcurso actual: ${selectedModule.title}. ID: ${selectedModule.id}. Objetivo general: ${selectedModule.objective}. Temario: ${JSON.stringify(selectedModule.subtopics)}. Inversión Individual: $${selectedModule.priceB2C} MXN. Inversión Corporativa B2B de grupo: $${selectedModule.priceB2B} MXN. Nota de transparencia: Instructor 4.0 ayuda a estandarizar capacitación, generar instrumentos y preparar evidencia; no garantiza certificación ni cumplimiento automático.`
+    : `Página principal de Instructor 4.0 como sistema de gobernanza de capacitación corporativa. El objetivo es estandarizar instructores internos, generar método común, instrumentos de evaluación, portafolios de evidencia e IA con criterios. La ruta opcional a certificación CONOCER EC0217.01 y EC0301 depende de evaluación formal independiente y dictamen competente.`;
 
   const getStripePrice = () => {
     if (showStripeSimulation.enrollId === 'full') {
@@ -115,15 +115,16 @@ const App: React.FC = () => {
           </div>
           
           <div className="hidden md:flex items-center gap-2 glass-panel rounded-full px-3 py-2">
+            <button onClick={() => navigateTo('pain-points')} className="px-4 py-2 rounded-full text-[13px] font-bold text-brand-slate hover:text-brand-ink hover:bg-white/70 transition">DIAGNÓSTICO</button>
+            <button onClick={() => navigateTo('how-it-works')} className="px-4 py-2 rounded-full text-[13px] font-bold text-brand-slate hover:text-brand-ink hover:bg-white/70 transition">SISTEMA</button>
             <button onClick={() => navigateTo('modules')} className="px-4 py-2 rounded-full text-[13px] font-bold text-brand-slate hover:text-brand-ink hover:bg-white/70 transition">RUTA MODULAR</button>
             <button onClick={() => navigateTo('benefits')} className="px-4 py-2 rounded-full text-[13px] font-bold text-brand-slate hover:text-brand-ink hover:bg-white/70 transition">BENEFICIOS</button>
             <button onClick={() => navigateTo('faq')} className="px-4 py-2 rounded-full text-[13px] font-bold text-brand-slate hover:text-brand-ink hover:bg-white/70 transition">PREGUNTAS FRECUENTES</button>
-            <button onClick={() => navigateTo('contact')} className="px-4 py-2 rounded-full text-[13px] font-bold text-brand-slate hover:text-brand-ink hover:bg-white/70 transition">CONTACTO</button>
             <button 
               onClick={handleBooking}
               className="px-5 py-2.5 cademmy-primary rounded-full text-[13px] font-bold transition"
             >
-              AGENDAR CITA
+              DIAGNÓSTICO EJECUTIVO
             </button>
           </div>
 
@@ -139,21 +140,16 @@ const App: React.FC = () => {
       {isMenuOpen && (
         <div className="fixed inset-0 z-50 bg-brand-soft pt-24 animate-in slide-in-from-top duration-300 md:hidden">
           <div className="flex flex-col items-center gap-8 p-10">
+            <button onClick={() => navigateTo('pain-points')} className="text-2xl font-bold text-brand-ink">DIAGNÓSTICO</button>
+            <button onClick={() => navigateTo('how-it-works')} className="text-2xl font-bold text-brand-ink">SISTEMA</button>
             <button onClick={() => navigateTo('modules')} className="text-2xl font-bold text-brand-ink">RUTA MODULAR</button>
             <button onClick={() => navigateTo('benefits')} className="text-2xl font-bold text-brand-ink">BENEFICIOS</button>
             <button onClick={() => navigateTo('faq')} className="text-2xl font-bold text-brand-ink">PREGUNTAS FRECUENTES</button>
-            <button onClick={() => navigateTo('contact')} className="text-2xl font-bold text-brand-ink">CONTACTO</button>
             <button 
               onClick={handleBooking}
               className="w-full py-5 cademmy-primary rounded-2xl font-bold text-xl"
             >
-              AGENDAR CITA
-            </button>
-            <button 
-              onClick={handleBooking}
-              className="w-full py-5 glass-panel text-brand-slate rounded-2xl font-bold text-xl"
-            >
-              AGENDAR ASESORÍA
+              DIAGNÓSTICO EJECUTIVO
             </button>
           </div>
         </div>
@@ -186,7 +182,7 @@ const App: React.FC = () => {
                 <img src="/cademmy-isologotipo-vertical.jpeg" alt="CADEMMY LEARNING" className="h-14 w-auto" referrerPolicy="no-referrer" />
               </div>
               <p className="text-brand-muted max-w-sm mx-auto md:mx-0 mb-6 leading-relaxed font-medium">
-                Potenciamos tu perfil profesional con tecnología de vanguardia y certificaciones oficiales CONOCER.
+                Sistema de gobernanza para estandarizar capacitación corporativa, documentar evidencia y profesionalizar instructores internos con IA aplicada bajo criterios.
               </p>
             </div>
             

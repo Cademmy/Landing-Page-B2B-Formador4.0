@@ -12,6 +12,9 @@ interface HubSpotFormProps {
 }
 
 const HubSpotForm: React.FC<HubSpotFormProps> = ({ requirement, price }) => {
+  const defaultRequirement = 'Diagnóstico Ejecutivo - Sistema de Gobernanza de Capacitación';
+  const defaultPrice = 'A definir según alcance y cohorte';
+
   useEffect(() => {
     const initForm = () => {
       if (window.hbspt) {
@@ -27,16 +30,16 @@ const HubSpotForm: React.FC<HubSpotFormProps> = ({ requirement, price }) => {
           target: '#formador-40-form',
           values: {
             // Requerimiento / Curso Fields
-            requerimiento: requirement || '',
-            requerimiento_o_curso: requirement || '',
-            curso: requirement || '',
-            curso_interesado: requirement || '',
-            programa_interes: requirement || '',
-            plan_seleccionado: requirement || '',
-            plan_elegido: requirement || '',
-            requerimiento_b2b: requirement || '',
-            requerimiento_de_capacitacion: requirement || '',
-            de_que_se_trata: requirement || '',
+            requerimiento: requirement || defaultRequirement,
+            requerimiento_o_curso: requirement || defaultRequirement,
+            curso: requirement || defaultRequirement,
+            curso_interesado: requirement || defaultRequirement,
+            programa_interes: requirement || defaultRequirement,
+            plan_seleccionado: requirement || defaultRequirement,
+            plan_elegido: requirement || defaultRequirement,
+            requerimiento_b2b: requirement || defaultRequirement,
+            requerimiento_de_capacitacion: requirement || defaultRequirement,
+            de_que_se_trata: requirement || defaultRequirement,
             
             // Pricing Fields
             precio: price || '',
@@ -47,25 +50,25 @@ const HubSpotForm: React.FC<HubSpotFormProps> = ({ requirement, price }) => {
             tarifa: price || '',
             
             // Native Message / Comments Fields
-            message: `CURSO O REQUERIMIENTO INTERESADO:\n👉 ${requirement || 'Ruta Completa - Instructor 4.0'}\n\nPRECIO OFRECIDO:\n👉 ${price || '$67,660 MXN'}`,
-            comentarios: `CURSO O REQUERIMIENTO INTERESADO:\n👉 ${requirement || 'Ruta Completa - Instructor 4.0'}\n\nPRECIO OFRECIDO:\n👉 ${price || '$67,660 MXN'}`,
-            comentarios___notas: `CURSO O REQUERIMIENTO INTERESADO:\n👉 ${requirement || 'Ruta Completa - Instructor 4.0'}\n\nPRECIO OFRECIDO:\n👉 ${price || '$67,660 MXN'}`,
-            comentarios_adicionales: `CURSO O REQUERIMIENTO INTERESADO:\n👉 ${requirement || 'Ruta Completa - Instructor 4.0'}\n\nPRECIO OFRECIDO:\n👉 ${price || '$67,660 MXN'}`,
-            notas: `CURSO O REQUERIMIENTO INTERESADO:\n👉 ${requirement || 'Ruta Completa - Instructor 4.0'}\n\nPRECIO OFRECIDO:\n👉 ${price || '$67,660 MXN'}`,
-            mensaje: `CURSO O REQUERIMIENTO INTERESADO:\n👉 ${requirement || 'Ruta Completa - Instructor 4.0'}\n\nPRECIO OFRECIDO:\n👉 ${price || '$67,660 MXN'}`
+            message: `REQUERIMIENTO INTERESADO:\n👉 ${requirement || defaultRequirement}\n\nINVERSIÓN / ALCANCE:\n👉 ${price || defaultPrice}`,
+            comentarios: `REQUERIMIENTO INTERESADO:\n👉 ${requirement || defaultRequirement}\n\nINVERSIÓN / ALCANCE:\n👉 ${price || defaultPrice}`,
+            comentarios___notas: `REQUERIMIENTO INTERESADO:\n👉 ${requirement || defaultRequirement}\n\nINVERSIÓN / ALCANCE:\n👉 ${price || defaultPrice}`,
+            comentarios_adicionales: `REQUERIMIENTO INTERESADO:\n👉 ${requirement || defaultRequirement}\n\nINVERSIÓN / ALCANCE:\n👉 ${price || defaultPrice}`,
+            notas: `REQUERIMIENTO INTERESADO:\n👉 ${requirement || defaultRequirement}\n\nINVERSIÓN / ALCANCE:\n👉 ${price || defaultPrice}`,
+            mensaje: `REQUERIMIENTO INTERESADO:\n👉 ${requirement || defaultRequirement}\n\nINVERSIÓN / ALCANCE:\n👉 ${price || defaultPrice}`
           },
           onFormReady: ($form: any) => {
             const formEl = $form[0] || $form;
             
             // Format prefilled text block for notes/comments/message textareas
-            const reqText = `CURSO O REQUERIMIENTO INTERESADO:\n👉 ${requirement || 'Ruta Completa - Instructor 4.0'}\n\nPRECIO OFRECIDO:\n👉 ${price || '$67,660 MXN'}\n\n`;
+            const reqText = `REQUERIMIENTO INTERESADO:\n👉 ${requirement || defaultRequirement}\n\nINVERSIÓN / ALCANCE:\n👉 ${price || defaultPrice}\n\n`;
 
             const applyPrefills = () => {
               // 1. Fill and update textareas
               const textareas = formEl.querySelectorAll('textarea');
               textareas.forEach((textarea: any) => {
                 const currentVal = textarea.value || '';
-                if (!currentVal.includes("CURSO O REQUERIMIENTO")) {
+                if (!currentVal.includes("REQUERIMIENTO INTERESADO")) {
                   textarea.value = reqText + currentVal;
                   textarea.dispatchEvent(new Event('input', { bubbles: true }));
                   textarea.dispatchEvent(new Event('change', { bubbles: true }));
@@ -85,8 +88,8 @@ const HubSpotForm: React.FC<HubSpotFormProps> = ({ requirement, price }) => {
                 const elements = formEl.querySelectorAll(`input[name="${name}"], textarea[name="${name}"], select[name="${name}"]`);
                 elements.forEach((el: any) => {
                   const targetVal = name.includes('precio') || name.includes('costo') || name.includes('inversion') || name.includes('tarifa')
-                    ? (price || '') 
-                    : (requirement || '');
+                    ? (price || defaultPrice)
+                    : (requirement || defaultRequirement);
                   
                   if (el.value !== targetVal) {
                     el.value = targetVal;
@@ -130,7 +133,7 @@ const HubSpotForm: React.FC<HubSpotFormProps> = ({ requirement, price }) => {
   return (
     <div className="w-full max-w-lg mx-auto p-2 bg-white rounded-xl">
         <p className="text-[10px] text-gray-400 font-extrabold uppercase text-center tracking-[0.2em] mb-4">
-          Cargando formulario y prellenando con tu cotización...
+          Cargando formulario y prellenando con tu diagnóstico...
         </p>
         <div id="formador-40-form"></div>
     </div>

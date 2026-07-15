@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { MODULES, GENERAL_BENEFITS } from '../constants';
+import { MODULES } from '../constants';
 import ModuleCard from '../components/ModuleCard';
-import { PromotionCountdown } from '../components/PromotionCountdown';
 
 interface HomeProps {
   onModuleClick: (id: string) => void;
@@ -9,10 +8,144 @@ interface HomeProps {
   onBookingClick: () => void;
 }
 
+type DiagnosticAnswer = boolean | null;
+
+interface DiagnosticItem {
+  id: string;
+  title: string;
+  question: string;
+  struggle: string;
+  solution: string;
+  feedbackYes: string;
+  feedbackNo: string;
+  icon: string;
+}
+
+interface RoiInputs {
+  instructors: number;
+  courses: number;
+  participants: number;
+  documentationHours: number;
+  frequency: number;
+}
+
+const trackConsultiveEvent = (eventName: string, detail?: Record<string, unknown>) => {
+  window.dispatchEvent(new CustomEvent(`cademmy:${eventName}`, { detail }));
+};
+
+const calculateRoiEstimate = (inputs: RoiInputs) => {
+  const methods = Math.max(1, inputs.courses);
+  const annualCourseInstances = Math.max(1, inputs.courses * inputs.frequency);
+  const potentialFiles = Math.max(1, inputs.participants * annualCourseInstances);
+  const instruments = Math.max(1, inputs.courses * 3);
+  const rubrics = Math.max(1, inputs.courses * 2);
+  const evidenceItems = Math.max(1, potentialFiles * 4);
+  const avoidableDocumentationHours = Math.round(inputs.documentationHours * annualCourseInstances * 0.45);
+
+  return {
+    methods,
+    potentialFiles,
+    instruments,
+    rubrics,
+    evidenceItems,
+    avoidableDocumentationHours
+  };
+};
+
+const getMaturityResult = (answers: DiagnosticAnswer[], items: DiagnosticItem[]) => {
+  const answered = answers.filter((answer) => answer !== null).length;
+  const risks = answers.filter(Boolean).length;
+  const governanceScore = Math.max(0, answered - risks);
+
+  const level =
+    governanceScore <= 1
+      ? { name: 'Nivel 1: Reactivo', width: '25%', tone: 'bg-brand-red', summary: 'La capacitación depende principalmente de esfuerzos individuales y documentación dispersa.' }
+      : governanceScore <= 3
+        ? { name: 'Nivel 2: Documentado', width: '50%', tone: 'bg-brand-orange', summary: 'Ya existen prácticas útiles, pero todavía falta estandarización y comparabilidad entre instructores.' }
+        : governanceScore <= 5
+          ? { name: 'Nivel 3: Estandarizado', width: '75%', tone: 'bg-brand-yellow', summary: 'La organización tiene bases claras para operar con método común y fortalecer trazabilidad.' }
+          : { name: 'Nivel 4: Instructor 4.0', width: '100%', tone: 'bg-brand-certification', summary: 'La capacitación puede gestionarse como una operación medible, documentada y escalable.' };
+
+  const strengths = items
+    .filter((_, index) => answers[index] === false)
+    .map((item) => item.title)
+    .slice(0, 3);
+
+  const gaps = items
+    .filter((_, index) => answers[index] === true)
+    .map((item) => item.title)
+    .slice(0, 3);
+
+  return {
+    answered,
+    risks,
+    governanceScore,
+    level,
+    strengths,
+    gaps,
+    actions: gaps.length
+      ? ['Priorizar brechas con mayor impacto documental.', 'Definir una metodología común de conducción y evaluación.', 'Preparar una cohorte piloto con entregables verificables.']
+      : ['Conservar el método actual como línea base.', 'Formalizar indicadores de trazabilidad.', 'Preparar expansión entre áreas o sedes.']
+  };
+};
+
+const ORG_BENEFITS = [
+  {
+    icon: '📈',
+    title: 'ROI más defendible',
+    desc: 'Cada acción de capacitación se conecta con objetivos, instrumentos y evidencias, facilitando explicar al comité qué se midió y con qué criterios.'
+  },
+  {
+    icon: '🗂️',
+    title: 'Evidencia disponible',
+    desc: 'Cada participante deja evidencia verificable, organizada y lista para revisiones internas, auditorías o decisiones de desarrollo.'
+  },
+  {
+    icon: '🧭',
+    title: 'Método común',
+    desc: 'La organización deja de depender del estilo individual de cada instructor y habilita una forma consistente de planear, impartir y cerrar sesiones.'
+  },
+  {
+    icon: '🧪',
+    title: 'Evaluación comparable',
+    desc: 'Rúbricas, listas de cotejo y guías de observación permiten comparar resultados sin depender de evaluaciones subjetivas.'
+  },
+  {
+    icon: '⚙️',
+    title: 'Implementación modular',
+    desc: 'El sistema se puede iniciar por brechas prioritarias o desplegar como ruta completa, sin convertir la capacitación en una interrupción operativa.'
+  },
+  {
+    icon: '🤖',
+    title: 'IA con gobernanza',
+    desc: 'La IA acelera planeación y documentación bajo criterios, prompts y lineamientos, reduciendo improvisación y variabilidad en los materiales.'
+  }
+];
+
 const FAQ_ITEMS = [
   {
     question: "¿Qué es Instructor/Formador 4.0 para empresas?",
     answer: "Es un sistema de estandarización para instructores internos: proporciona una metodología común para planear, impartir y evaluar capacitación, generando instrumentos y evidencias por participante acelerado por herramientas digitales e Inteligencia Artificial."
+  },
+  {
+    question: "¿Es un curso, una metodología o una plataforma?",
+    answer: "Es una metodología de gobernanza de capacitación implementada mediante talleres, microcursos, instrumentos y herramientas digitales. No sustituye tu LMS ni tus procesos internos; los complementa con método común, evidencia y criterios de evaluación."
+  },
+  {
+    question: "¿Cómo justifico la inversión ante un comité?",
+    answer: "La conversación se plantea desde brechas de negocio: variabilidad entre instructores, trazabilidad, evidencia, evaluación y riesgo documental. En la sesión ejecutiva revisamos alcance, entregables, cohorte, calendario e indicadores que pueden respaldar la propuesta."
+  },
+  {
+    question: "¿Cómo se mide el nivel de madurez?",
+    answer: "La página usa un diagnóstico orientativo de 7 riesgos. El nivel se calcula con una lógica simple: mientras menos riesgos activos existan, mayor madurez de gobernanza. No sustituye una auditoría ni una consultoría formal; ayuda a preparar la conversación ejecutiva."
+  },
+  {
+    question: "¿Sustituye nuestro LMS actual?",
+    answer: "No. Instructor 4.0 puede convivir con un LMS existente porque se enfoca en método, instrumentos, evidencia y competencias del instructor. El LMS puede seguir funcionando como repositorio o canal de distribución."
+  },
+  {
+    question: "¿Qué significa IA con gobernanza?",
+    answer: "Significa usar IA con lineamientos, prompts, criterios de revisión y control humano. La IA acelera planeación y documentación, pero las decisiones metodológicas y la validación final permanecen en manos del equipo responsable."
   },
   {
     question: "¿Existe alguna promoción de certificación para mi grupo?",
@@ -89,60 +222,110 @@ const FAQ_ITEMS = [
 ];
 
 const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBookingClick }) => {
-  const [activePainTab, setActivePainTab] = useState<number>(0);
+  const [activeDiagnosticStep, setActiveDiagnosticStep] = useState<number>(0);
+  const [diagnosticAnswers, setDiagnosticAnswers] = useState<DiagnosticAnswer[]>(Array(7).fill(null));
+  const [roiInputs, setRoiInputs] = useState<RoiInputs>({
+    instructors: 8,
+    courses: 12,
+    participants: 180,
+    documentationHours: 6,
+    frequency: 2
+  });
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  const painPoints = [
+  const painPoints: DiagnosticItem[] = [
     {
       id: "roi",
       title: "Impacto y ROI",
+      question: "¿Hoy puedes demostrar con evidencia qué cambió después de capacitar?",
       struggle: "Capacitas habilidades blandas o técnicas, pero los resultados no se vuelven observables y comparables. Te cuesta justificar inversión porque falta un sistema de objetivos, instrumentos y evidencias por participante.",
       solution: "Instructor 4.0 conecta objetivos, actividades e instrumentos para generar evidencia por participante y criterios comparables entre grupos. La capacitación deja de ser “solo horas” y se vuelve una mejora verificable.",
+      feedbackYes: "Esta brecha suele aparecer cuando la capacitación se gestiona como evento y no como operación medible.",
+      feedbackNo: "Buen punto de partida: si ya existe evidencia, el siguiente paso es hacerla comparable y gobernable.",
       icon: "📈"
     },
     {
       id: "evidencia",
       title: "Auditoría y Evidencias",
+      question: "¿Tu evidencia principal sigue siendo asistencia y encuestas de satisfacción?",
       struggle: "Solo tienes carpetas de hojas firmadas como listas de asistencia y encuestas superficiales de satisfacción (las cuales no prueban aprendizaje). Ante auditorías de calidad o sistemas de gestión interna, la capacitación es difícil de sustentar técnicamente.",
       solution: "Creamos portafolios de evidencias digitales de cada participante, listos en segundos. Esto te otorga un expediente transparente con listas de cotejo, resultados ponderados, firmas de acuerdos y rúbricas analíticas estructuradas.",
+      feedbackYes: "Aquí existe una oportunidad clara: transformar registros administrativos en evidencia de aprendizaje.",
+      feedbackNo: "Eso indica una base documental valiosa. Conviene revisar si es consistente entre áreas e instructores.",
       icon: "📊"
     },
     {
       id: "estandar",
       title: "Estandarización",
+      question: "¿Cada instructor interno imparte con un estilo y criterio diferente?",
       struggle: "Tu capacitación interna es inconsistente. Dependes de un 'instructor estrella' empírico; si esa persona se va o es promovida, todo el know-how metodológico de impartición técnica se pierde o se diluye, creando silos de información.",
       solution: "Institucionaliza un protocolo oficial corporativo uniforme de encuadre, conducción participativa, cierre, medición de conocimientos y archivo documental, de tal modo que cualquier experto técnico pueda dar clases con el mismo estándar de calidad.",
+      feedbackYes: "La variabilidad no siempre se ve como riesgo hasta que se intenta escalar o auditar la capacitación.",
+      feedbackNo: "Si ya existe consistencia, el sistema puede ayudar a documentarla y volverla replicable.",
       icon: "🧬"
     },
     {
       id: "evaluacion",
       title: "Evaluación Científica",
+      question: "¿Los aprendizajes se evalúan más por criterio personal que por instrumentos compartidos?",
       struggle: "No existen rúbricas ni criterios formales de calificación; la asimilación del staff se evalúa 'a ojo' u ojeando un cuestionario de memoria superficial, lo cual no comprueba destrezas de desempeño práctico en su área operativa diaria.",
       solution: "Enseñamos a tus instructores a formular e implementar Guías de Observación de comportamientos de seguridad, Listas de Cotejo de entregables físicos corporativos y Rúbricas analíticas robustas, calibrándolas de forma guiada para eliminar errores.",
+      feedbackYes: "La medición subjetiva limita la comparabilidad entre grupos y debilita las decisiones de desarrollo.",
+      feedbackNo: "Tener instrumentos compartidos reduce fricción para escalar calidad y defender resultados.",
       icon: "⚖️"
     },
     {
       id: "operacion",
       title: "Operación y Adopción",
+      question: "¿La capacitación compite con operación y se posterga por falta de formatos ágiles?",
       struggle: "La capacitación corporativa compite de forma constante con los horarios operativos y metas de entrega de la planta. Retirar al personal por largas jornadas detiene la productividad y genera fricción interna en Recursos Humanos.",
       solution: "Enfoque de clases modulares. Los microcursos son ágiles, puntuales e implementables en el puesto técnico con menor fricción operativa y mejores condiciones para la adopción.",
+      feedbackYes: "Cuando la operación percibe la capacitación como interrupción, conviene modularizar y priorizar por brechas.",
+      feedbackNo: "Si la adopción es fluida, la siguiente mejora es asegurar trazabilidad y continuidad metodológica.",
       icon: "🧩"
     },
     {
       id: "ia",
       title: "IA Controlada",
+      question: "¿Tu equipo usa IA sin lineamientos, criterios o revisión metodológica?",
       struggle: "Temes que el staff de instructores utilice herramientas de IA libres para generar materiales inconsistentes, erróneos, de baja calidad o que vulneren las políticas corporativas de confidencialidad y marca del negocio.",
       solution: "Instauramos directrices claras de IA aplicada con control y criterios. Tu equipo es capacitado utilizando un manual de buenas prácticas, prompts oficiales autorizados y criterios estrictos de curaduría para que RH no pierda el control.",
+      feedbackYes: "La velocidad sin criterios puede multiplicar errores. La IA necesita gobernanza, no solo acceso.",
+      feedbackNo: "Excelente: los lineamientos son una ventaja si se conectan con entregables e indicadores.",
       icon: "🤖"
     },
     {
       id: "riesgo",
       title: "Riesgo y Cumplimiento",
+      question: "¿Sería difícil defender la capacitación ante auditoría, inspección o comité?",
       struggle: "Necesitas sustentar tus capacitaciones ante requerimientos del marco legal de la Secretaría del Trabajo y Previsión Social (STPS), sistemas de excelencia de la industria o inspecciones regulatorias directas.",
       solution: "Estructura diseñada bajo pautas de estándares de competencia nacionales. Facilitamos el registro de constancias de competencias de la STPS formato DC-3 y el soporte técnico elemental para revisiones regulatorias.",
+      feedbackYes: "La debilidad no es capacitar poco; suele ser no poder demostrar método, evidencia y trazabilidad.",
+      feedbackNo: "Si la defensa documental ya existe, conviene convertirla en una práctica institucional escalable.",
       icon: "🛡️"
     }
   ];
+
+  const diagnosticResult = getMaturityResult(diagnosticAnswers, painPoints);
+  const roiEstimate = calculateRoiEstimate(roiInputs);
+
+  const answerDiagnostic = (value: boolean) => {
+    setDiagnosticAnswers((current) => {
+      const next = [...current];
+      next[activeDiagnosticStep] = value;
+      trackConsultiveEvent('diagnostic_step_answered', {
+        step: activeDiagnosticStep + 1,
+        riskId: painPoints[activeDiagnosticStep].id,
+        hasRisk: value
+      });
+      return next;
+    });
+  };
+
+  const goToDiagnosticStep = (step: number) => {
+    setActiveDiagnosticStep(step);
+    trackConsultiveEvent('diagnostic_step_viewed', { step: step + 1, riskId: painPoints[step].id });
+  };
 
   return (
     <div className="animate-in fade-in duration-500">
@@ -155,17 +338,17 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
           <div className="lg:col-span-7">
             <div className="inline-flex items-center gap-2 cademmy-chip text-brand-slate px-5 py-2.5 rounded-full text-[10px] font-bold tracking-[0.22em] mb-8 uppercase">
               <span className="w-2 h-2 rounded-full bg-brand-red"></span>
-              PROGRAMA CORPORATIVO · 30 HRS + 4 HRS ONLINE · HASTA 30 PARTICIPANTES
+              SISTEMA DE GOBERNANZA · 30 HRS + 4 HRS ONLINE · HASTA 30 PARTICIPANTES
             </div>
             <h1 className="font-display text-4xl md:text-6xl font-black text-brand-ink mb-8 leading-[1.04] tracking-tight">
-              Estandariza a tus instructores internos.
+              Estandariza toda la capacitación de tu organización.
             </h1>
             <p className="text-lg md:text-xl text-brand-slate mb-8 leading-relaxed max-w-2xl font-medium">
-              Un sistema para que tu capacitación sea consistente, medible y defendible: metodología común, instrumentos de evaluación y evidencias por participante, con IA aplicada para acelerar la planeación sin perder control.
+              Cuando cada instructor enseña diferente, la organización pierde consistencia, evidencia y capacidad para demostrar resultados. Instructor 4.0 convierte la capacitación en un sistema institucional medible, auditable y escalable.
             </p>
 
-            <div className="grid sm:grid-cols-3 gap-3 mb-10 max-w-3xl">
-              {['Menos variabilidad entre instructores', 'Evidencia auditable: instrumentos + trazabilidad', 'Planeación más rápida con IA (con criterios)'].map((chip) => (
+            <div className="grid sm:grid-cols-4 gap-3 mb-10 max-w-4xl">
+              {['Método institucional', 'Evidencia por participante', 'IA con gobernanza', 'Ruta opcional a certificación'].map((chip) => (
                 <div key={chip} className="cademmy-chip rounded-2xl px-4 py-3 text-sm font-bold text-brand-ink">
                   {chip}
                 </div>
@@ -177,13 +360,13 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
                 onClick={onBookingClick}
                 className="px-8 py-4.5 cademmy-primary rounded-2xl font-bold text-base transition text-center"
               >
-                Agendar Sesión de Resultados (30 min)
+                Obtén un Diagnóstico Ejecutivo
               </button>
               <button 
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
                 className="px-8 py-4.5 glass-panel text-brand-ink rounded-2xl font-bold text-base hover:bg-white/80 transition text-center"
               >
-                Solicitar propuesta para mi cohorte
+                Ver cómo funciona
               </button>
             </div>
 
@@ -263,71 +446,225 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
         </div>
       </section>
 
-      {/* Pain Points Interactive Diagnostic Section */}
+      {/* Diagnostic Section */}
       <section id="pain-points" className="py-28 border-y border-white/70">
         <div className="container mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-20">
             <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">PORTAL DE DIAGNÓSTICO</span>
             <h2 className="font-display text-4xl md:text-5xl font-black text-brand-ink tracking-tight">
-              ¿Qué impide que tu capacitación sea <span className="text-brand-orange">medible y defendible</span>?
+              ¿Cuántos de estos 7 riesgos existen actualmente en tu organización?
             </h2>
             <p className="text-brand-muted mt-4 text-lg font-medium leading-relaxed">
-              Selecciona tus retos principales para ver cómo el sistema Instructor 4.0 te da gobernanza, evidencia y decisiones más claras.
+              Responde con criterio ejecutivo. Al final verás un nivel de madurez y una ruta inicial para conversar con tu comité.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto">
-            {/* Left Nav Tabs */}
+          <div className="grid lg:grid-cols-12 gap-8 items-stretch max-w-6xl mx-auto mb-10">
             <div className="lg:col-span-4 flex flex-col gap-2">
               {painPoints.map((item, index) => (
                 <button
                   key={item.id}
-                  onClick={() => setActivePainTab(index)}
+                  onClick={() => goToDiagnosticStep(index)}
                   className={`p-4 text-left rounded-xl font-bold text-sm transition-all duration-300 flex items-center justify-between border ${
-                    activePainTab === index
+                    activeDiagnosticStep === index
                       ? 'bg-brand-ink text-white border-brand-ink shadow-md'
                       : 'glass-panel text-brand-slate hover:text-brand-ink hover:bg-white/80'
                   }`}
+                  aria-current={activeDiagnosticStep === index ? 'step' : undefined}
                 >
                   <span className="flex items-center gap-3">
                     <span className="text-lg">{item.icon}</span>
                     {item.title}
                   </span>
-                  <span className="text-xs font-mono">{activePainTab === index ? '➔' : '+'}</span>
+                  <span className="text-xs font-mono">
+                    {diagnosticAnswers[index] === null ? (activeDiagnosticStep === index ? '➔' : '+') : diagnosticAnswers[index] ? 'Riesgo' : 'Base'}
+                  </span>
                 </button>
               ))}
             </div>
 
-            {/* Right Display Panel */}
             <div className="lg:col-span-8 glass-card p-8 md:p-12 rounded-[2rem] flex flex-col justify-between">
               <div>
-                <span className="text-4xl mb-4 inline-block">{painPoints[activePainTab].icon}</span>
-                <h3 className="text-2xl font-black text-brand-ink mb-6">
-                  Reto prioritario de RH (según tu selección)
+                <div className="mb-8">
+                  <div className="flex items-center justify-between mb-3 text-xs font-bold text-brand-muted uppercase tracking-widest">
+                    <span>Paso {activeDiagnosticStep + 1} de 7</span>
+                    <span>{diagnosticResult.answered}/7 respondidos</span>
+                  </div>
+                  <div className="h-2 rounded-full bg-white/80 overflow-hidden">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-brand-orange to-brand-red transition-all duration-500"
+                      style={{ width: `${(diagnosticResult.answered / painPoints.length) * 100}%` }}
+                    />
+                  </div>
+                </div>
+
+                <span className="text-4xl mb-4 inline-block">{painPoints[activeDiagnosticStep].icon}</span>
+                <h3 className="text-2xl md:text-3xl font-black text-brand-ink mb-4">
+                  {painPoints[activeDiagnosticStep].question}
                 </h3>
-                
-                {/* Block: The Struggle */}
-                <div className="mb-8 p-6 bg-brand-red/5 rounded-2xl border border-brand-red/10">
-                  <p className="text-[10px] font-bold text-red-600 uppercase tracking-widest mb-2">El Reto en Recursos Humanos</p>
-                  <p className="text-sm text-brand-ink font-medium leading-relaxed">
-                    {painPoints[activePainTab].struggle}
-                  </p>
+                <p className="text-sm text-brand-muted font-semibold leading-relaxed mb-8">
+                  {painPoints[activeDiagnosticStep].struggle}
+                </p>
+
+                <div className="grid sm:grid-cols-2 gap-3 mb-8">
+                  <button
+                    onClick={() => answerDiagnostic(true)}
+                    className={`rounded-2xl px-5 py-4 text-left border transition focus:outline-none focus:ring-4 focus:ring-brand-orange/20 ${
+                      diagnosticAnswers[activeDiagnosticStep] === true ? 'bg-brand-red/10 border-brand-red text-brand-ink' : 'bg-white/70 border-white hover:border-brand-red/40'
+                    }`}
+                  >
+                    <span className="block text-xs font-black uppercase tracking-widest text-brand-red mb-1">Sí existe</span>
+                    <span className="text-sm font-bold">Debe atenderse como brecha.</span>
+                  </button>
+                  <button
+                    onClick={() => answerDiagnostic(false)}
+                    className={`rounded-2xl px-5 py-4 text-left border transition focus:outline-none focus:ring-4 focus:ring-brand-certification/20 ${
+                      diagnosticAnswers[activeDiagnosticStep] === false ? 'bg-brand-certification/10 border-brand-certification text-brand-ink' : 'bg-white/70 border-white hover:border-brand-certification/40'
+                    }`}
+                  >
+                    <span className="block text-xs font-black uppercase tracking-widest text-brand-certification mb-1">No actualmente</span>
+                    <span className="text-sm font-bold">Puede ser una fortaleza base.</span>
+                  </button>
                 </div>
 
-                {/* Block: The Solution */}
-                <div className="p-6 bg-brand-certification/5 rounded-2xl border border-brand-certification/10">
-                  <p className="text-[10px] font-bold text-brand-certification uppercase tracking-widest mb-2">La Solución Instructor 4.0</p>
-                  <p className="text-sm text-brand-ink font-medium leading-relaxed">
-                    {painPoints[activePainTab].solution}
-                  </p>
-                </div>
-              </div>
+                {diagnosticAnswers[activeDiagnosticStep] !== null && (
+                  <div className="p-6 bg-brand-certification/5 rounded-2xl border border-brand-certification/10 mb-8">
+                    <p className="text-[10px] font-bold text-brand-certification uppercase tracking-widest mb-2">Retroalimentación ejecutiva</p>
+                    <p className="text-sm text-brand-ink font-medium leading-relaxed mb-3">
+                      {diagnosticAnswers[activeDiagnosticStep]
+                        ? painPoints[activeDiagnosticStep].feedbackYes
+                        : painPoints[activeDiagnosticStep].feedbackNo}
+                    </p>
+                    <p className="text-sm text-brand-ink font-medium leading-relaxed">
+                      <strong>Respuesta del sistema:</strong> {painPoints[activeDiagnosticStep].solution}
+                    </p>
+                  </div>
+                )}
 
-              <div className="mt-8 pt-6 border-t border-white/80 flex justify-between items-center text-xs text-brand-muted font-bold uppercase tracking-wider">
-                <span>Cademmy B2B Consulting Group</span>
-                <span>Paso {activePainTab + 1} de 7</span>
+                <div className="flex flex-col sm:flex-row gap-3 justify-between">
+                  <button
+                    onClick={() => goToDiagnosticStep(Math.max(0, activeDiagnosticStep - 1))}
+                    disabled={activeDiagnosticStep === 0}
+                    className="px-5 py-3 rounded-xl glass-panel text-sm font-bold disabled:opacity-40"
+                  >
+                    Anterior
+                  </button>
+                  <button
+                    onClick={() => goToDiagnosticStep(Math.min(painPoints.length - 1, activeDiagnosticStep + 1))}
+                    disabled={activeDiagnosticStep === painPoints.length - 1}
+                    className="px-5 py-3 rounded-xl bg-brand-ink text-white text-sm font-bold disabled:opacity-40"
+                  >
+                    Siguiente riesgo
+                  </button>
+                </div>
               </div>
             </div>
+          </div>
+
+          <div className="max-w-6xl mx-auto glass-card rounded-[2rem] p-8 md:p-10">
+            <div className="grid lg:grid-cols-12 gap-8 items-center">
+              <div className="lg:col-span-5">
+                <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">Resultado de tu Diagnóstico</span>
+                <h3 className="font-display text-3xl md:text-4xl font-black text-brand-ink mb-4">{diagnosticResult.level.name}</h3>
+                <p className="text-sm text-brand-muted font-semibold leading-relaxed mb-6">{diagnosticResult.level.summary}</p>
+                <div className="h-3 rounded-full bg-white/80 overflow-hidden mb-3">
+                  <div className={`h-full rounded-full ${diagnosticResult.level.tone} transition-all duration-500`} style={{ width: diagnosticResult.level.width }} />
+                </div>
+                <p className="text-xs text-brand-muted font-bold">Lógica: menor número de riesgos activos = mayor madurez de gobernanza.</p>
+              </div>
+              <div className="lg:col-span-7 grid md:grid-cols-2 gap-4">
+                <div className="rounded-2xl bg-white/70 border border-white p-5">
+                  <h4 className="font-black text-brand-ink mb-3">Fortalezas actuales</h4>
+                  <ul className="space-y-2 text-sm text-brand-slate font-semibold">
+                    {(diagnosticResult.strengths.length ? diagnosticResult.strengths : ['Completa el diagnóstico para identificar fortalezas']).map((item) => <li key={item}>• {item}</li>)}
+                  </ul>
+                </div>
+                <div className="rounded-2xl bg-brand-red/5 border border-brand-red/10 p-5">
+                  <h4 className="font-black text-brand-ink mb-3">Brechas principales</h4>
+                  <ul className="space-y-2 text-sm text-brand-slate font-semibold">
+                    {(diagnosticResult.gaps.length ? diagnosticResult.gaps : ['Sin brechas críticas marcadas hasta ahora']).map((item) => <li key={item}>• {item}</li>)}
+                  </ul>
+                </div>
+                <div className="md:col-span-2 rounded-2xl bg-brand-certification/5 border border-brand-certification/10 p-5">
+                  <h4 className="font-black text-brand-ink mb-3">Acciones recomendadas</h4>
+                  <div className="grid sm:grid-cols-3 gap-3 text-sm text-brand-slate font-semibold">
+                    {diagnosticResult.actions.map((item) => <span key={item}>• {item}</span>)}
+                  </div>
+                  <button
+                    onClick={() => {
+                      trackConsultiveEvent('diagnostic_report_cta_clicked', { level: diagnosticResult.level.name, risks: diagnosticResult.risks });
+                      document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className="mt-6 px-6 py-3 cademmy-primary rounded-xl font-bold text-sm"
+                  >
+                    Recibir mi Reporte Ejecutivo
+                  </button>
+                  <p className="mt-3 text-xs text-brand-muted font-semibold">El reporte se prepara en la sesión ejecutiva; esta página deja listo el punto de integración con formulario/CRM.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Before / After Transformation */}
+      <section className="py-28">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">TRANSFORMACIÓN OPERATIVA</span>
+            <h2 className="font-display text-4xl md:text-5xl font-black text-brand-ink tracking-tight">Así cambia una organización</h2>
+            <p className="text-brand-muted mt-4 text-lg font-medium leading-relaxed">
+              El valor no está en tomar más cursos, sino en operar la capacitación con método, evidencia y capacidad de mejora continua.
+            </p>
+          </div>
+          <div className="grid lg:grid-cols-2 gap-8">
+            <div className="glass-card rounded-[2rem] p-8 border-t-4 border-t-brand-red/70">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-brand-red mb-5">Antes: capacitación dependiente de personas</p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {['Cada instructor enseña diferente', 'Sólo existen listas de asistencia', 'Evaluaciones subjetivas', 'Conocimiento dependiente del instructor', 'Sin trazabilidad', 'Documentación dispersa', 'Resultados difíciles de comparar', 'Calidad variable entre áreas'].map((item) => (
+                  <div key={item} className="rounded-2xl bg-brand-red/5 border border-brand-red/10 p-4 text-sm font-bold text-brand-slate">{item}</div>
+                ))}
+              </div>
+            </div>
+            <div className="glass-card rounded-[2rem] p-8 border-t-4 border-t-brand-certification">
+              <p className="text-xs font-black uppercase tracking-[0.3em] text-brand-certification mb-5">Después: gobernanza de capacitación</p>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {['Método institucional', 'Portafolio por participante', 'Rúbricas compartidas', 'Comparabilidad', 'Gobernanza', 'Documentación estructurada', 'Evidencia verificable', 'Escalabilidad entre áreas e instructores'].map((item) => (
+                  <div key={item} className="rounded-2xl bg-brand-certification/5 border border-brand-certification/10 p-4 text-sm font-bold text-brand-slate">{item}</div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Cost of Inaction */}
+      <section className="py-28 border-y border-white/70">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">DECISIÓN EJECUTIVA</span>
+            <h2 className="font-display text-4xl md:text-5xl font-black text-brand-ink tracking-tight">¿Qué cuesta no estandarizar?</h2>
+            <p className="text-brand-muted mt-4 text-lg font-medium leading-relaxed">
+              Estas consecuencias son plausibles en operaciones de capacitación sin método común. La sesión ejecutiva ayuda a dimensionarlas en tu contexto.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              ['Variabilidad entre instructores', 'Cada facilitador decide estructura, lenguaje y criterios.', 'La experiencia cambia entre grupos y se pierde comparabilidad.'],
+              ['Pérdida por rotación', 'El conocimiento vive en personas clave.', 'Cuando cambian de rol, el método se vuelve difícil de reconstruir.'],
+              ['Dificultades ante auditorías', 'La evidencia queda incompleta o dispersa.', 'RH invierte tiempo reconstruyendo trazabilidad después del curso.'],
+              ['Retrabajo y duplicidad', 'Cada instructor crea materiales desde cero.', 'Se repiten esfuerzos y se desaprovechan activos reutilizables.'],
+              ['IA sin criterios', 'Se generan contenidos rápidos, pero no necesariamente coherentes.', 'La organización gana velocidad sin control metodológico.'],
+              ['Presupuesto difícil de justificar', 'Se reportan horas impartidas, no evidencias comparables.', 'El comité ve gasto, pero no capacidad instalada.']
+            ].map(([title, occurs, impact]) => (
+              <div key={title} className="glass-card rounded-[1.75rem] p-6 hover:-translate-y-1 transition">
+                <h3 className="text-lg font-black text-brand-ink mb-4">{title}</h3>
+                <p className="text-xs font-bold uppercase tracking-widest text-brand-orange mb-2">Qué ocurre</p>
+                <p className="text-sm text-brand-slate font-semibold leading-relaxed mb-4">{occurs}</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-brand-muted mb-2">Capacidad que se pierde</p>
+                <p className="text-sm text-brand-slate font-semibold leading-relaxed">{impact}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -344,7 +681,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
           </p>
         </div>
         <div className="container mx-auto px-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl">
-          {GENERAL_BENEFITS.map((benefit, idx) => (
+          {ORG_BENEFITS.map((benefit, idx) => (
             <div key={idx} className="p-8 rounded-[1.75rem] glass-card hover:-translate-y-1 transition duration-300 flex flex-col">
               <div className="text-4xl mb-6 bg-white/70 w-14 h-14 rounded-2xl flex items-center justify-center shadow-sm border border-white">{benefit.icon}</div>
               <h3 className="text-xl font-bold mb-4 text-brand-ink shrink-0">{benefit.title}</h3>
@@ -355,13 +692,13 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
       </section>
 
       {/* Explanatory Block B2B */}
-      <section className="py-24 border-y border-white/70">
+      <section id="how-it-works" className="py-24 border-y border-white/70">
         <div className="container mx-auto px-6 max-w-5xl text-center">
           <h2 className="font-display text-4xl font-black text-brand-ink tracking-tight mb-6">
-            Implementación por grupo o generación (sin frenar la operación)
+            Así funciona Instructor 4.0
           </h2>
           <p className="text-lg text-brand-muted mb-16 leading-relaxed max-w-2xl mx-auto font-medium">
-            Nuestro programa se amolda a tu giro técnico o comercial sin interrumpir las jornadas de trabajo.
+            Un mecanismo práctico para convertir capacitación interna en una operación con diagnóstico, método, evidencia y mejora continua.
           </p>
           <div className="grid md:grid-cols-3 gap-8 text-left">
             <div className="glass-card p-8 rounded-[1.75rem] hover:-translate-y-1 transition">
@@ -385,6 +722,117 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
                 La certificación nacional oficial (EC0217.01 y EC0301) es opcional y se obtiene a través de un examen independiente. El certificado se emite por CONOCER únicamente al resultar Competente.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* System Demonstration */}
+      <section className="py-28">
+        <div className="container mx-auto px-6 max-w-6xl">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">DEMOSTRACIÓN DEL SISTEMA</span>
+            <h2 className="font-display text-4xl md:text-5xl font-black text-brand-ink tracking-tight">De planeación a expediente auditable</h2>
+            <p className="text-brand-muted mt-4 text-lg font-medium leading-relaxed">
+              En la sesión ejecutiva se muestran ejemplos de entregables. Esta representación ilustra el flujo sin sustituir una demo real.
+            </p>
+          </div>
+          <div className="grid lg:grid-cols-4 gap-5">
+            {[
+              ['Objetivos SMART-Bloom', 'Define metas observables y alineadas a dominio cognitivo, psicomotor o afectivo.', 'Produce: carta descriptiva y criterios de logro.'],
+              ['Rúbricas y listas', 'Convierte criterios en instrumentos compartidos para evaluar con menos subjetividad.', 'Produce: instrumentos comparables.'],
+              ['IA con lineamientos', 'Acelera redacción y revisión con prompts y reglas de curaduría.', 'Produce: materiales consistentes.'],
+              ['Expediente del participante', 'Agrupa evidencias, resultados y observaciones para consulta posterior.', 'Produce: trazabilidad documental.'],
+              ['Portafolio digital', 'Organiza entregables de producto, desempeño y conocimiento.', 'Produce: estructura RH-Ready.'],
+              ['Evaluación', 'Integra diagnóstica, formativa y sumativa con criterios claros.', 'Produce: decisiones de mejora.'],
+              ['Documentación del instructor', 'Conserva planes de sesión, recursos y acuerdos de aprendizaje.', 'Produce: método replicable.'],
+              ['Indicadores', 'Resume avance, brechas y evidencia pendiente.', 'Produce: visibilidad ejecutiva.']
+            ].map(([title, problem, evidence]) => (
+              <div key={title} className="glass-card rounded-[1.75rem] p-6">
+                <div className="h-28 rounded-2xl bg-brand-ink text-white p-4 mb-5 overflow-hidden">
+                  <div className="h-2 w-16 rounded-full bg-brand-orange mb-4" />
+                  <div className="space-y-2">
+                    <div className="h-2 rounded-full bg-white/50 w-full" />
+                    <div className="h-2 rounded-full bg-white/30 w-3/4" />
+                    <div className="h-2 rounded-full bg-brand-certification/70 w-1/2" />
+                  </div>
+                </div>
+                <h3 className="font-black text-brand-ink mb-3">{title}</h3>
+                <p className="text-sm text-brand-slate font-semibold leading-relaxed mb-3">{problem}</p>
+                <p className="text-xs text-brand-orange font-black uppercase tracking-wider">{evidence}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Illustrative Case + ROI */}
+      <section className="py-28 border-y border-white/70">
+        <div className="container mx-auto px-6 max-w-6xl grid lg:grid-cols-12 gap-8">
+          <div className="lg:col-span-5 glass-card rounded-[2rem] p-8">
+            <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">CASO ILUSTRATIVO</span>
+            <h2 className="font-display text-3xl font-black text-brand-ink mb-6">Timeline preparado para evidencia real</h2>
+            <p className="text-sm text-brand-muted font-semibold leading-relaxed mb-8">
+              No se muestran clientes ni resultados no verificados. Esta estructura queda lista para incorporar un caso real cuando Cademmy autorice datos, testimonios o indicadores.
+            </p>
+            <div className="space-y-4">
+              {['Problema', 'Diagnóstico', 'Implementación', 'Adopción', 'Resultado', 'Indicadores'].map((step, index) => (
+                <div key={step} className="flex gap-4 items-start">
+                  <span className="w-8 h-8 rounded-full bg-brand-orange/10 text-brand-orange font-black text-xs flex items-center justify-center shrink-0">{index + 1}</span>
+                  <div>
+                    <h3 className="font-black text-brand-ink">{step}</h3>
+                    <p className="text-sm text-brand-slate font-semibold">Placeholder editable para evidencia real del proyecto.</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="lg:col-span-7 glass-card rounded-[2rem] p-8">
+            <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">CALCULADORA ORIENTATIVA</span>
+            <h2 className="font-display text-3xl font-black text-brand-ink mb-6">Capacidad potencial de estandarización</h2>
+            <div className="grid sm:grid-cols-2 gap-4 mb-8">
+              {[
+                ['instructors', 'Número de instructores', 1, 80],
+                ['courses', 'Cursos internos al año', 1, 120],
+                ['participants', 'Participantes anuales', 10, 3000],
+                ['documentationHours', 'Horas de documentación por curso', 1, 40],
+                ['frequency', 'Frecuencia anual por curso', 1, 12]
+              ].map(([key, label, min, max]) => (
+                <label key={key} className="block">
+                  <span className="text-xs font-black uppercase tracking-widest text-brand-muted">{label}</span>
+                  <input
+                    type="number"
+                    min={min as number}
+                    max={max as number}
+                    value={roiInputs[key as keyof RoiInputs]}
+                    onChange={(event) => {
+                      const value = Math.max(Number(min), Number(event.target.value) || Number(min));
+                      setRoiInputs((current) => ({ ...current, [key as keyof RoiInputs]: value }));
+                      trackConsultiveEvent('roi_calculator_changed', { field: key, value });
+                    }}
+                    className="mt-2 w-full rounded-xl border border-white bg-white/80 px-4 py-3 font-bold text-brand-ink focus:outline-none focus:ring-4 focus:ring-brand-orange/20"
+                  />
+                </label>
+              ))}
+            </div>
+            <div className="grid sm:grid-cols-3 gap-3 mb-6">
+              {[
+                ['Métodos a estandarizar', roiEstimate.methods],
+                ['Expedientes potenciales', roiEstimate.potentialFiles],
+                ['Instrumentos requeridos', roiEstimate.instruments],
+                ['Rúbricas administrables', roiEstimate.rubrics],
+                ['Evidencias organizadas', roiEstimate.evidenceItems],
+                ['Horas potencialmente evitadas', roiEstimate.avoidableDocumentationHours]
+              ].map(([label, value]) => (
+                <div key={label} className="rounded-2xl bg-white/70 border border-white p-4">
+                  <p className="text-2xl font-black text-brand-ink">{value}</p>
+                  <p className="text-xs font-bold text-brand-muted uppercase tracking-wider">{label}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-xs text-brand-muted font-semibold leading-relaxed">
+              Esta estimación es orientativa y depende del proceso actual, el nivel de adopción y la configuración de la organización. No representa un resultado garantizado.
+            </p>
           </div>
         </div>
       </section>
@@ -421,6 +869,42 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Social Proof and Authority */}
+      <section className="py-24 border-y border-white/70">
+        <div className="container mx-auto px-6 max-w-6xl grid lg:grid-cols-2 gap-8">
+          <div className="glass-card rounded-[2rem] p-8 md:p-10">
+            <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">PRUEBA SOCIAL</span>
+            <h2 className="font-display text-3xl font-black text-brand-ink mb-6">Organizaciones donde este sistema puede generar valor</h2>
+            <p className="text-sm text-brand-muted font-semibold leading-relaxed mb-6">
+              Espacio preparado para logos, sectores o testimonios reales. No se muestran marcas ni citas hasta contar con autorización expresa.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-3">
+              {['Plantas industriales', 'Universidades corporativas', 'Equipos de calidad', 'Áreas de RH / L&D', 'Operaciones multi-sede', 'Capacitación técnica'].map((item) => (
+                <div key={item} className="rounded-2xl bg-white/70 border border-white p-4 text-sm font-bold text-brand-slate">{item}</div>
+              ))}
+            </div>
+          </div>
+
+          <div className="glass-card rounded-[2rem] p-8 md:p-10">
+            <span className="text-xs font-bold text-brand-orange uppercase tracking-[0.3em] mb-4 inline-block">AUTORIDAD Y TRANSPARENCIA</span>
+            <h2 className="font-display text-3xl font-black text-brand-ink mb-6">¿Por qué confiar en este sistema?</h2>
+            <div className="space-y-4">
+              {[
+                ['Alineación metodológica', 'El contenido toma como referencia competencias de EC0217.01 y EC0301 sin presentarse como certificación automática.'],
+                ['Evaluación separada', 'La evaluación formal y emisión de certificados CONOCER son procesos independientes y dependen del dictamen competente.'],
+                ['Gobernanza documental', 'El sistema prioriza instrumentos, portafolios y evidencia organizada para soporte interno.'],
+                ['IA bajo criterio', 'La IA se usa como apoyo para planeación y evaluación, manteniendo revisión humana y criterios institucionales.']
+              ].map(([title, text]) => (
+                <div key={title} className="rounded-2xl bg-white/70 border border-white p-5">
+                  <h3 className="font-black text-brand-ink mb-2">{title}</h3>
+                  <p className="text-sm text-brand-slate font-semibold leading-relaxed">{text}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -526,8 +1010,9 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
           <div className="glass-card p-8 rounded-[1.75rem] flex flex-col justify-between hover:-translate-y-1 transition">
             <div>
               <span className="text-[10px] text-brand-vino font-black uppercase tracking-widest bg-brand-vino/10 px-3 py-1.5 rounded-full inline-block mb-6">PROYECTO PILOTO</span>
-              <h3 className="text-2xl font-bold text-brand-ink mb-2">Plan Iniciador B2B</h3>
-              <p className="text-sm text-brand-muted mb-6 font-medium">Idóneo para equipar y calibrar de 1 a 3 instructores clave internos en la ruta completa de 34 horas de curso.</p>
+              <p className="text-xs font-black uppercase tracking-widest text-brand-orange mb-2">Obtienes</p>
+              <h3 className="text-2xl font-bold text-brand-ink mb-2">Validación piloto del sistema</h3>
+              <p className="text-sm text-brand-muted mb-6 font-medium">Idóneo para calibrar de 1 a 3 instructores clave, probar entregables y decidir si conviene escalar a una cohorte completa.</p>
               <div className="mb-6">
                 <span className="text-4xl font-extrabold text-brand-ink">$7,990</span>
                 <span className="text-xs font-bold text-brand-muted"> MXN + IVA / instructor</span>
@@ -553,8 +1038,9 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
             </div>
             <div>
               <span className="text-[10px] text-brand-orange font-black uppercase tracking-widest bg-brand-orange/10 px-3 py-1.5 rounded-full inline-block mb-6">ESCALAMIENTO DE EQUIPO</span>
-              <h3 className="text-2xl font-bold text-brand-ink mb-2">Plan Ruta Unificada</h3>
-              <p className="text-sm text-brand-muted mb-6 font-medium">Profesionaliza equipos enteros (grupo de máximo 30 personas) en el pipeline completo de 34 horas por $67,660 MXN de inversión corporativa.</p>
+              <p className="text-xs font-black uppercase tracking-widest text-brand-orange mb-2">Obtienes</p>
+              <h3 className="text-2xl font-bold text-brand-ink mb-2">Gobernanza para una cohorte completa</h3>
+              <p className="text-sm text-brand-muted mb-6 font-medium">Implementa el sistema con hasta 30 participantes: método común, instrumentos, evidencia y ruta opcional a certificación.</p>
               <div className="mb-6">
                 <span className="text-4xl font-extrabold text-brand-ink">$67,660</span>
                 <span className="text-xs font-bold text-brand-muted"> MXN / ruta corporativa total</span>
@@ -577,8 +1063,9 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
           <div className="glass-card p-8 rounded-[1.75rem] flex flex-col justify-between hover:-translate-y-1 transition">
             <div>
               <span className="text-[10px] text-brand-bright-orange font-black uppercase tracking-widest bg-brand-bright-orange/10 px-3 py-1.5 rounded-full inline-block mb-6">CUSTOM CO-CREACIÓN</span>
-              <h3 className="text-2xl font-bold text-brand-ink mb-2">In-Company Enterprise</h3>
-              <p className="text-sm text-brand-muted mb-6 font-medium">Adaptación completa a su marca, problemas técnicos y manuales específicos de planta operativa.</p>
+              <p className="text-xs font-black uppercase tracking-widest text-brand-orange mb-2">Obtienes</p>
+              <h3 className="text-2xl font-bold text-brand-ink mb-2">Sistema adaptado a operación interna</h3>
+              <p className="text-sm text-brand-muted mb-6 font-medium">Co-creación de ejemplos, instrumentos y casos con base en procesos, lenguaje y prioridades de tu organización.</p>
               <div className="mb-6">
                 <span className="text-4xl font-extrabold text-brand-ink">Custom</span>
                 <span className="text-xs font-bold text-brand-muted"> / bajo cotización</span>
@@ -598,9 +1085,14 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
           </div>
         </div>
 
-        {/* Dynamic Countdown Banner with Elegant Styling */}
+        {/* Commercial transparency without artificial urgency */}
         <div className="container mx-auto px-6 max-w-6xl mt-16">
-          <PromotionCountdown />
+          <div className="glass-card rounded-[2rem] p-8 border border-brand-orange/20">
+            <p className="text-xs font-black uppercase tracking-[0.3em] text-brand-orange mb-3">Transparencia comercial</p>
+            <p className="text-sm text-brand-slate font-semibold leading-relaxed">
+              Si tu organización implementa la ruta completa, se puede bonificar al 100% el costo de alineación del estándar. La evaluación formal y la emisión del certificado CONOCER son procesos independientes; el certificado se paga únicamente cuando el candidato realiza la evaluación y resulta competente.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -667,9 +1159,12 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(245,130,31,0.24),transparent_28rem)]"></div>
             <div className="p-10 md:p-14 md:col-span-6 text-white flex flex-col justify-between relative z-10">
               <div>
-                <h2 className="text-4xl font-black mb-6 tracking-tighter">Agenda una Sesión de Diagnóstico B2B</h2>
+                <h2 className="text-4xl font-black mb-6 tracking-tighter">Obtén un Diagnóstico Ejecutivo</h2>
                 <p className="text-base opacity-80 mb-10 font-semibold leading-relaxed">
-                  Permite a nuestros consultores senior evaluar las brechas metodológicas de tus facilitadores y diseñar un plan de desarrollo a la medida de tu presupuesto de Recursos Humanos.
+                  En una sesión de 30 minutos analizaremos tu operación actual y definiremos una ruta inicial para estandarizar la capacitación de tu organización.
+                </p>
+                <p className="text-xs text-white/60 font-bold uppercase tracking-widest mb-10">
+                  Sin compromiso comercial. La sesión se enfoca en identificar brechas, prioridades y siguientes pasos.
                 </p>
               </div>
               <div className="space-y-6">
@@ -694,7 +1189,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
               <div className="w-16 h-16 bg-brand-yellow/10 text-brand-orange rounded-2xl flex items-center justify-center text-3xl mb-6">📆</div>
               <h3 className="text-2xl font-bold text-brand-ink mb-2">Microsoft Bookings</h3>
               <p className="text-brand-muted mb-8 font-medium leading-relaxed text-sm">
-                Agenda directamente una llamada estratégica de 15 minutos en el calendario de nuestros especialistas o escanea el QR corporativo.
+                Agenda directamente una llamada estratégica en el calendario de nuestros especialistas o escanea el QR corporativo.
               </p>
               
               <div className="mb-8 p-3 bg-white border border-gray-150 rounded-2xl shadow-sm">
@@ -710,7 +1205,7 @@ const Home: React.FC<HomeProps> = ({ onModuleClick, onFullCourseClick, onBooking
                 onClick={onBookingClick}
                 className="w-full py-4.5 cademmy-primary uppercase tracking-wider rounded-2xl font-bold text-sm transition-all"
               >
-                Agendar sesión en Bookings ➔
+                Obtener Diagnóstico Ejecutivo ➔
               </button>
             </div>
           </div>
